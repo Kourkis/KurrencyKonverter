@@ -1,0 +1,40 @@
+*{
+	color: #193441;
+}
+body{
+	background-color: #FCFFF5;
+}
+.logo-div{
+	height:70px;
+	background-color: #91AA9D;
+	margin-bottom: 1rem;
+}
+
+.top-currencies-div{
+	background-color: #91AA9D;
+	height:70px;
+}
+.top-currencies-div .box{
+	height: 100%;
+	padding: 0.5rem 0px 0.5rem 0.5rem;
+}
+.top-currencies-div .box:last-child{
+	padding-right: 0.5rem;
+}
+.top-currencies-div .box .small-box{
+	background-color: #D1DBBD;
+	height: 100%;
+}
+.second-line .small-box{
+	padding: 0.5rem;
+}
+.second-line .converter-inputs, .second-line .prediction, .second-line .threshold{
+	background-color: #D1DBBD;
+	margin-bottom: 1rem;
+}
+.second-line .graph{
+	background-color: #91AA9D;
+}
+label{
+	color: #193441 !important;
+}
