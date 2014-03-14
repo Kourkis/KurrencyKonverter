@@ -90,7 +90,10 @@ body{
 	padding: 1rem;
 	margin: auto;
 }
-
+#worldmap{
+width:1260px;
+margin:auto;
+}
 .price-beer{
 
 	height:168px;
