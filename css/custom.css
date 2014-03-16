@@ -91,12 +91,12 @@ body{
 	margin: auto;
 }
 #worldmap{
-width:1260px;
-margin:auto;
+	width:1000px;
+	margin:auto;
 }
 .price-beer{
 
-	height:168px;
+	height:100px;
 }
 .price-beer .box{
 	height: 100%;
@@ -107,6 +107,42 @@ margin:auto;
 }
 .price-beer .box .small-box{
 	height: 100%;
+}
+.price-beer .priceDiv{
+	
+    height: 100%;
+}
+
+.price-beer .price{
+	background-color: rgba(128, 128, 128, 0.4);
+    height: 100%;
+    line-height: 68px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 5;
+}
+.price-beer .images{
+	height: 100%;
+    position: relative;
+    text-align: center;
+    top: -100%;
+    z-index: 4;
+}
+.price-beer .beer{
+	height: inherit;
+    opacity: 0.85;
+    position: relative;
+    z-index: 4;
+}
+.price-beer .flag{
+	display: inline-block;
+    height: inherit;
+    position: relative;
+    top: -100%;
+    vertical-align: middle;
+    width: inherit;
+    z-index: 3;
 }
 label{
 	color: #421C52 !important;
