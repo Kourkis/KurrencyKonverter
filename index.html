@@ -5,24 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kurrency Konverter</title>
   <link rel="stylesheet" href="css/foundation.css" />
-  <link rel="stylesheet" href="css/custom.css"/>
+  <link rel="stylesheet" href="css/custom.css"/><!-- Custom stylesheet -->
   <script src="js/vendor/modernizr.js"></script>
 </head>
 <body>
   <div class="row">
-    <div class="small-2 columns">
+    <div class="medium-2 large-2 columns">
       <div class="row">
         <div class="small-12 columns">
-          <div class="logo-div color4">
-            <center><img src="img/logo.png"></center>
+          <div class="logo-div color4"><!-- Div containing the logo -->
+            <div class="centered"><img src="img/logo.png" alt="logo"></div>
           </div>
         </div>
       </div>
     </div>
-    <div class="small-10 columns ">
+    <div class="medium-12 large-10 columns ">
       <div class="row ">
         <div class="small-12 columns">
-          <div class="top-currencies-div color4">
+          <div class="top-currencies-div color4"><!-- Div containing the top currencies -->
             <div class="small-2 columns box">
               <div class="small-box color2">
                 <div class="symbol-div">GBP</div>
@@ -53,83 +53,217 @@
                 <div class="arrow-div arrow-up"></div>
               </div>
             </div>
-
-          <div class="small-2 columns box">
-            <div class="small-box color2">
-              <div class="symbol-div">INR</div>
-              <div class="data-div">
-                <div class="percent-div">0.19%</div>
-                <div class="value-div">102.0</div>
+            <div class="small-2 columns box">
+              <div class="small-box color2">
+                <div class="symbol-div">INR</div>
+                <div class="data-div">
+                  <div class="percent-div">0.19%</div>
+                  <div class="value-div">102.0</div>
+                </div>
+                <div class="arrow-div arrow-up"></div>
               </div>
-              <div class="arrow-div arrow-up"></div>
+            </div>
+            <div class="small-2 columns box">
+              <div class="small-box color2">
+                <div class="symbol-div">AUD</div>
+                <div class="data-div">
+                  <div class="percent-div">-0.33%</div>
+                  <div class="value-div">1.842</div>
+                </div>
+                <div class="arrow-div arrow-down"></div>
+              </div>
+            </div>
+            <div class="small-2 columns box">
+              <div class="small-box color2">
+                <div class="symbol-div">CAD</div>
+                <div class="data-div">
+                  <div class="percent-div">-0.24%</div>
+                  <div class="value-div">1.843</div>
+                </div>
+                <div class="arrow-div arrow-down"></div>
+              </div>
             </div>
           </div>
-
-        <div class="small-2 columns box">
-          <div class="small-box color2">
-            <div class="symbol-div">AUD</div>
-            <div class="data-div">
-              <div class="percent-div">-0.33%</div>
-              <div class="value-div">1.842</div>
-            </div>
-            <div class="arrow-div arrow-down"></div>
-          </div>
-        </div>
-
-      <div class="small-2 columns box">
-        <div class="small-box color2">
-          <div class="symbol-div">CAD</div>
-          <div class="data-div">
-            <div class="percent-div">-0.24%</div>
-            <div class="value-div">1.843</div>
-          </div>
-          <div class="arrow-div arrow-down"></div>
         </div>
       </div>
-
-
+    </div>
   </div>
-</div>
-</div>
-</div>
-</div>
-</div> 
 
-<div class="row second-line">
-  <div class="small-6 medium-3 columns">
-    <div class="row ">
-      <div class="small-12 columns">
-        <div class="small-box converter-inputs color2">
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Home Currency</label>
-              <input type="text" placeholder="EUR, £, dollar..." />
+  <div class="row second-line">
+    <div class="small-6 medium-3 columns">
+      <div class="row ">
+        <div class="small-12 columns">
+          <div class="small-box converter-inputs color2"><!-- Div containing the inputs and the converter -->
+            <div class="row">
+              <div class="large-12 columns">
+                <label>Home Currency</label>
+                <input type="text" placeholder="EUR, £, dollar..." />
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Host Currency</label>
-              <input type="text" placeholder="EUR, £, dollar..." />
+            <div class="row">
+              <div class="large-12 columns">
+                <label>Host Currency</label>
+                <input type="text" placeholder="EUR, £, dollar..." />
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns converter">
-              <div class="row collapse">
-                <label>Convert</label>
-                <div class="small-9 columns">
-                  <input type="text" placeholder="100">
+            <div class="row">
+              <div class="large-12 columns converter">
+                <div class="row collapse">
+                  <label>Convert</label>
+                  <div class="small-9 columns">
+                    <input type="text" placeholder="100">
+                  </div>
+                  <div class="small-3 columns">
+                    <span class="postfix has-tip tip-right" data-tooltip title="Select your home currency to be able to convert from it.">K</span>
+                  </div>
                 </div>
-                <div class="small-3 columns">
-                  <span class="postfix has-tip tip-right" data-tooltip title="Select your home currency to be able to convert from it.">K</span>
+                <div class="row collapse">
+                  <label>to</label>
+                  <div class="small-9 columns">
+                    <input type="text" placeholder="100">
+                  </div>
+                  <div class="small-3 columns">
+                    <span class="postfix has-tip tip-right" data-tooltip title="Select your host currency to be able to convert to it.">K</span>
+                  </div>
                 </div>
               </div>
-              <div class="row collapse">
-                <label>to</label>
-                <div class="small-9 columns">
-                  <input type="text" placeholder="100">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small-12 medium-6 columns">
+      <div class="row ">
+        <div class="small-12 columns">
+          <div class="small-box graph color3"><!-- Div containing the graph -->
+            <img src="img/graph.png" style="height:290px;"  alt="graph">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small-6 medium-3 columns">
+      <div class="row ">
+        <div class="small-12 columns">
+          <div class="small-box prediction color2"><!-- Div containing the next predicted low point -->
+            <div class="centered">Next predicted low point:</div>
+            <div class="centered">31/03/2014</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small-6 medium-3 columns">
+      <div class="row">
+        <div class="small-12 columns">
+          <div class="small-box threshold color2"><!-- Div containing the input to set a threshold, the input for the email and the button to connect with facebook -->
+            <div class="row">
+              <div class="large-12 columns">
+                <div class="centered">Set threshold</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <label>Target Value</label>
+                <input type="text" placeholder="1.25" />
+              </div>
+            </div>
+            <div class="row collapse">
+              <label>Email Alert</label>
+              <div class="large-10 columns">
+                <input type="text" placeholder="name@example.com" />
+              </div>
+              <div class="large-2 columns">
+                <a href="#" class="button postfix">Go</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <label>Facebook Connect</label>
+                <img src="img/facebooklogin.png"  alt="Facebook Login Button">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row third-line">
+    <div class="small-6 medium-3 columns">
+      <div class="row">
+        <div class="small-12 columns">
+          <div class="small-box map color2"><!-- Div containing the image to display the popup map -->
+            <div class="centered">Currency use in the world</div>
+            <a data-reveal-id="mapModal" href="#"><img src="img/worldmap_currencies_small.png"  alt="Worldmap of currencies"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small-12 medium-9 columns">
+      <div class="row ">
+        <div class="small-12 columns">
+          <div class="price-beer color4"><!-- Div containing the price of beers in the world -->
+            <div class="small-2 columns box">
+              <div class="small-box color2">
+                <div class="priceDiv">
+                  <div class="price">£2.75</div>
+                  <div class="images">
+                    <img src="img/beer.png" class="beer" alt="beer">
+                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                  </div>
                 </div>
-                <div class="small-3 columns">
-                  <span class="postfix has-tip tip-right" data-tooltip title="Select your host currency to be able to convert to it.">K</span>
+              </div>
+            </div>
+            <div class="small-2 columns box">
+              <div class="small-box color2">
+                <div class="priceDiv">
+                  <div class="price">£2.75</div>
+                  <div class="images">
+                    <img src="img/beer.png" class="beer" alt="beer">
+                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="small-2 columns box">
+              <div class="small-box color2">
+                <div class="priceDiv">
+                  <div class="price">£2.75</div>
+                  <div class="images">
+                    <img src="img/beer.png" class="beer" alt="beer">
+                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="small-2 columns box">
+              <div class="small-box color2">
+                <div class="priceDiv">
+                  <div class="price">£2.75</div>
+                  <div class="images">
+                    <img src="img/beer.png" class="beer" alt="beer">
+                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="small-2 columns box">
+              <div class="small-box color2">
+                <div class="priceDiv">
+                  <div class="price">£2.75</div>
+                  <div class="images">
+                    <img src="img/beer.png" class="beer" alt="beer">
+                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="small-2 columns box">
+              <div class="small-box color2">
+                <div class="priceDiv">
+                  <div class="price">£2.75</div>
+                  <div class="images">
+                    <img src="img/beer.png" class="beer" alt="beer">
+                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,157 +272,18 @@
       </div>
     </div>
   </div>
-  <div class="small-12 medium-6 columns">
-    <div class="row ">
-      <div class="small-12 columns">
-        <div class="small-box graph color3">
-          <img src="img/graph.png" style="height:290px;">
-        </div>
-      </div>
+  <div data-reveal class="reveal-modal" id="mapModal"><!-- Div containing the Google Map for the currencies use in the world -->
+    <h3>Use of selected currencies worldwide</h3>
+    <div id="worldmap">
+      <iframe class="map"  style="overflow:hidden; border:none;"  src="https://www.google.com/fusiontables/embedviz?q=select+col9%3E%3E1+from+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+where+col3%3E%3E0+%3D+&#39;USD&#39;&amp;viz=MAP&amp;h=false&amp;lat=20.914809917964508&amp;lng=1.7692420748214666&amp;t=1&amp;z=2&amp;l=col9%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe>
     </div>
-  </div>
-  <div class="small-6 medium-3 columns">
-    <div class="row ">
-      <div class="small-12 columns">
-        <div class="small-box prediction color2">
-          <center>Next predicted low point:</center>
-          <center>17/03/2014</center>
-        </div>
-      </div>
-    </div>
+    <a class="close-reveal-modal">×</a>
   </div>
 
-  <div class="small-6 medium-3 columns">
-    <div class="row">
-      <div class="small-12 columns">
-        <div class="small-box threshold color2">
-          <div class="row">
-            <div class="large-12 columns">
-              <center>Set threshold</center>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Target Value</label>
-              <input type="text" placeholder="1.25" />
-            </div>
-          </div>
-          <div class="row collapse">
-            <label>Email Alert</label>
-            <div class="large-10 columns">
-              <input type="text" placeholder="name@example.com" />
-            </div>
-            <div class="large-2 columns">
-              <a href="#" class="button postfix">Go</a>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <label>Facebook Connect</label>
-              <img src="img/facebooklogin.png">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row third-line">
-  <div class="small-6 medium-3 columns">
-    <div class="row">
-      <div class="small-12 columns">
-        <div class="small-box map color2">
-          <center>Currency use in the world</center>
-          <a data-reveal-id="mapModal" href="#"><img src="img/worldmap_currencies_small.png"></a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="small-12 medium-9 columns">
-    <div class="row ">
-      <div class="small-12 columns">
-        <div class="price-beer color4">
-          <div class="small-2 columns box">
-            <div class="small-box color2">
-              <div class="priceDiv">
-                <div class="price">£2.75</div>
-                <div class="images">
-                  <img src="img/beer.png" class="beer">
-                  <img src="img/ukflag.jpg" class="flag">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="small-2 columns box">
-            <div class="small-box color2">
-              <div class="priceDiv">
-                <div class="price">£2.75</div>
-                <div class="images">
-                  <img src="img/beer.png" class="beer">
-                  <img src="img/ukflag.jpg" class="flag">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="small-2 columns box">
-            <div class="small-box color2">
-              <div class="priceDiv">
-                <div class="price">£2.75</div>
-                <div class="images">
-                  <img src="img/beer.png" class="beer">
-                  <img src="img/ukflag.jpg" class="flag">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="small-2 columns box">
-            <div class="small-box color2">
-              <div class="priceDiv">
-                <div class="price">£2.75</div>
-                <div class="images">
-                  <img src="img/beer.png" class="beer">
-                  <img src="img/ukflag.jpg" class="flag">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="small-2 columns box">
-            <div class="small-box color2">
-              <div class="priceDiv">
-                <div class="price">£2.75</div>
-                <div class="images">
-                  <img src="img/beer.png" class="beer">
-                  <img src="img/ukflag.jpg" class="flag">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="small-2 columns box">
-            <div class="small-box color2">
-              <div class="priceDiv">
-                <div class="price">£2.75</div>
-                <div class="images">
-                  <img src="img/beer.png" class="beer">
-                  <img src="img/ukflag.jpg" class="flag">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div data-reveal class="reveal-modal" id="mapModal">
-  <h2>Use of selected currencies in the world</h2>
-  <div id="worldmap"><iframe width="1000" height="500" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col9%3E%3E1+from+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+where+col3%3E%3E0+%3D+&#39;USD&#39;&amp;viz=MAP&amp;h=false&amp;lat=40.56870936826228&amp;lng=56.86523237499999&amp;t=1&amp;z=2&amp;l=col9%3E%3E1&amp;y=2&amp;tmplt=2&amp;hml=KML"></iframe></div>
-  <a class="close-reveal-modal">×</a>
-</div>
-
-<script src="js/vendor/jquery.js"></script>
-<script src="js/foundation.min.js"></script>
-<script>
-$(document).foundation();
-</script>
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script>
+  $(document).foundation();
+  </script>
 </body>
 </html>

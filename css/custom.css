@@ -24,7 +24,7 @@ body{
 .top-currencies-div .box .small-box{
 	height: 100%;
 	padding:0.2rem;
-    vertical-align:middle; /* center vertically */
+    vertical-align:middle; 
 }
 .symbol-div, .data-div, .arrow-div{
 	display: inline-block;
@@ -86,13 +86,22 @@ body{
 .third-line .map img{
 	width: auto;
 }
+#mapModal{
+	height: 75%;
+}
 #mapModal img{
 	padding: 1rem;
 	margin: auto;
 }
 #worldmap{
-	width:1000px;
+	width:100%;
 	margin:auto;
+	height: 100%;
+}
+#worldmap .map{
+	width: 100%;
+	height: 90%;
+	min-height: 250px;
 }
 .price-beer{
 
@@ -144,10 +153,28 @@ body{
     width: inherit;
     z-index: 3;
 }
+.centered{
+	text-align: center;
+}
 label{
 	color: #421C52 !important;
 }
-
+button, .button{
+	color: #421C52;
+	background-color: #BDAEC6;
+}
+button:hover, .button:hover, button:focus, .button:focus{
+	color: #BDAEC6;
+	background-color: #421C52;
+}
+span.postfix, label.postfix{
+	color: #421C52;
+	background-color: #BDAEC6;
+}
+.has-tip:hover, .has-tip:focus{
+	color: #732C7B;
+	border-bottom: 1px dotted #BDAEC6;
+}
 .color4{
 	background-color: #421C52;
 }
