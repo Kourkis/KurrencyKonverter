@@ -98,13 +98,13 @@
             <div class="row">
               <div class="large-12 columns">
                 <label>Home Currency</label>
-                <input type="text" placeholder="EUR, £, dollar..." />
+                <input id="inputHomeCurrency" class="currencyselector" type="text" placeholder="EUR, GBP, USD..." />
               </div>
             </div>
             <div class="row">
               <div class="large-12 columns">
                 <label>Host Currency</label>
-                <input type="text" placeholder="EUR, £, dollar..." />
+                <input id="inputHostCurrency" class="currencyselector" type="text" placeholder="USD, EUR, GBP..." />
               </div>
             </div>
             <div class="row">
@@ -112,19 +112,19 @@
                 <div class="row collapse">
                   <label>Convert</label>
                   <div class="small-9 columns">
-                    <input type="text" placeholder="100">
+                    <input id="converterHomeCurrency" type="text" placeholder="100">
                   </div>
                   <div class="small-3 columns">
-                    <span class="postfix has-tip tip-right" data-tooltip title="Select your home currency to be able to convert from it.">K</span>
+                    <span id="converterHomeCurrencyTip" class="postfix has-tip tip-right" data-tooltip title="Select your home currency to be able to convert from it.">K</span>
                   </div>
                 </div>
                 <div class="row collapse">
                   <label>to</label>
                   <div class="small-9 columns">
-                    <input type="text" placeholder="100">
+                    <input id="converterHostCurrency" type="text" placeholder="100">
                   </div>
                   <div class="small-3 columns">
-                    <span class="postfix has-tip tip-right" data-tooltip title="Select your host currency to be able to convert to it.">K</span>
+                    <span id="converterHostCurrencyTip" class="postfix has-tip tip-right" data-tooltip title="Select your host currency to be able to convert to it.">K</span>
                   </div>
                 </div>
               </div>
@@ -280,11 +280,117 @@
     </div>
     <a class="close-reveal-modal">×</a>
   </div>
-
+  <div id="results">
+  </div>
   <script src="js/vendor/jquery.js"></script>
+  <script src="js/jquery-ui-1.10.4.custom.js"></script>
   <script src="js/foundation.min.js"></script>
   <script>
+  availableCurrencies = [];
+  function log(thing){
+    console.log(thing);
+  }
   $(document).foundation();
-  </script>
+  $(function() {
+    var query = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+'ISO+code'+++FROM+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+GROUP+BY+'ISO+code'+ORDER+BY+'ISO+code'+ASC&hdrs=false&typed=true&key=AIzaSyCCdCZEl31z9YPzDfX7kNOYY09ErJwCArM"
+    $.ajax({
+      url: query,
+      cache: false
+    })
+    .done(function( json ) {
+      for (var i = 0; i< json.rows.length; i++) {
+        availableCurrencies.push(json.rows[i][0]);
+      };
+      $( ".currencyselector" ).autocomplete({
+        source: availableCurrencies,
+        autoFocus: true,
+        delay: 500
+      });
+      $('.ui-autocomplete').addClass('f-dropdown');
+      log(availableCurrencies);
+    });
+
+    inputHomeCurrency = document.getElementById("inputHomeCurrency");
+    inputHomeCurrency.addEventListener("input", currencyHandler, true);
+    inputHostCurrency = document.getElementById("inputHostCurrency");
+    inputHostCurrency.addEventListener("input", currencyHandler, true);
+    converterHomeCurrencyTip = document.getElementById("converterHomeCurrencyTip");
+    converterHostCurrencyTip = document.getElementById("converterHostCurrencyTip");
+    intervalCurrencies = setInterval(currencyHandler, 1000);
+    function currencyHandler(){
+      if(checkInput(inputHomeCurrency)){
+        log(inputHomeCurrency);
+        colorText(inputHomeCurrency,"green");
+      }else{
+        colorText(inputHomeCurrency,"red");
+      }
+      if(checkInput(inputHostCurrency)){
+        log(inputHostCurrency);
+        colorText(inputHostCurrency,"green");
+      }else{
+        colorText(inputHostCurrency,"red");
+      }
+      if(checkInput(inputHomeCurrency) && checkInput(inputHostCurrency)){
+        log("2 currencies selected, let's rock");
+        converterHomeCurrencyTip.innerHTML = inputHomeCurrency.value;
+        converterHostCurrencyTip.innerHTML = inputHostCurrency.value;
+        window.homeCurrency = inputHomeCurrency.value;
+        window.hostCurrency = inputHostCurrency.value;
+        getRates();
+        clearInterval(intervalCurrencies);
+        intervalCurrencies = false;
+      }else{
+        if(!intervalCurrencies)
+          intervalCurrencies = setInterval(currencyHandler, 1000);
+      }
+    }
+    function getRates(){
+      
+      $.ajax({
+      dataType: "jsonp",
+      url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getrates&home="+window.homeCurrency+"&host="+window.hostCurrency+"&callback=mycallback",
+       success: function( response ) {
+        saveRates( response );
+        }
+      });
+
+      log("getRates() finished");
+    }
+    function saveRates( json ){
+      log(json[0]);
+      log(json[1]);
+      if(json[0].currency_code==window.homeCurrency){
+        window.homeRate = json[0].value;
+        window.hostRate = json[1].value;
+      }else{
+        window.homeRate = json[1].value;
+        window.hostRate = json[0].value;
+      }
+
+      converterHomeCurrency = document.getElementById("converterHomeCurrency");
+      converterHomeCurrency.addEventListener("input", converter, true);
+      converterHostCurrency = document.getElementById("converterHostCurrency");
+      converterHostCurrency.addEventListener("input", converter, true);
+      converterHomeCurrency.placeholder = (1/window.homeRate*window.hostRate).toFixed(3);
+      converterHostCurrency.placeholder = (1/window.hostRate*window.homeRate).toFixed(3);
+    }
+    function converter(e){
+      if(e.target==converterHomeCurrency){
+        converterHostCurrency.value = (converterHomeCurrency.value/window.homeRate*window.hostRate).toFixed(3);
+      }else{
+        converterHomeCurrency.value = (converterHostCurrency.value/window.hostRate*window.homeRate).toFixed(3);
+      }
+    }
+    
+    function colorText(elem,color){
+      elem.style.color=color;
+    }
+    function checkInput(input){
+      return ( availableCurrencies.indexOf(input.value) == -1 ) ? false : true;
+    }
+
+  });
+
+</script>
 </body>
 </html>

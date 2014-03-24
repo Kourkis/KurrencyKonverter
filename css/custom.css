@@ -156,6 +156,10 @@ body{
 .centered{
 	text-align: center;
 }
+
+
+.ui-helper-hidden-accessible{display:none}
+
 label{
 	color: #421C52 !important;
 }
