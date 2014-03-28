@@ -69,12 +69,15 @@ body{
 .second-line .small-box{
 	padding: 0.5rem;
 }
-.second-line .converter-inputs, .second-line .prediction, .second-line .threshold{
-
+.second-line .converter-inputs, .second-line .prediction, .second-line .threshold, .second-line .graph{
 	margin-bottom: 1rem;
 }
-.second-line .graph{
-
+.second-line #visualization table{
+	background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    left: -0.6rem;
+    position: relative;
+    top: -0.6rem;
 }
 .third-line .small-box{
 	padding: 0.5rem;
