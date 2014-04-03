@@ -85,5 +85,34 @@ if($_GET["action"]=="getpopularcurrencies"){
 	}
 }
 
-
+if($_GET["action"]=="setthreshold"){
+	header("Content-type: application/json");
+	header("Cache-Control: no-cache, must-revalidate");
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+	$home = $_GET["home"];
+	$host = $_GET["host"];
+	$ratio = $_GET["ratio"];
+	$email = $_GET["email"];
+	$ratioinit = $_GET["ratioinit"];
+	$sql = "INSERT INTO `micheltest`.`currencies_alerts` (`homecurrency`, `hostcurrency`, `ratio`, `email`, `ratioinit`) VALUES (:home, :host, :ratio, :email, :ratioinit)";
+	$b=$dbh->prepare($sql);
+	$b->bindParam(":home",$home);
+	$b->bindParam(":host",$host);
+	$b->bindParam(":ratio",$ratio);
+	$b->bindParam(":email",$email);
+	$b->bindParam(":ratioinit",$ratioinit);
+	$b->execute();
+	$res = $b->fetchAll(PDO::FETCH_ASSOC);
+	$json=json_encode($res);
+	echo $_GET['callback']."(".$json.");";
+}
+if($_GET["action"]=="nextlowestpoint"){
+	print_r(get_loaded_extensions());
+if(extension_loaded("session")){
+	echo "session loaded";
+}
+if(extension_loaded("trader")){
+	echo "trader loaded";
+}
+}
 ?>

@@ -13,6 +13,49 @@
   <script type="text/javascript">
   google.load('visualization', '1', {packages: ['annotatedtimeline']});
   </script>
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34940415-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+  <script type="text/javascript">
+
+  function setCookie(cname,cvalue)
+  {
+    var d = new Date();
+    d.setTime(d.getTime()+(365*24*60*60*1000));
+    var expires = "expires="+d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+  }
+
+  function getCookie(cname)
+  {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++)
+    {
+      var c = ca[i].trim();
+      if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+    }
+    return "";
+  }
+
+  function checkCookie()
+  {
+    var data=getCookie("save");
+    if (data!="")
+    {
+      log("cookie retrieved");
+    }
+  }
+
+  </script>
 </head>
 <body>
   <div class="row">
@@ -166,21 +209,23 @@
                 <div class="centered">Set threshold</div>
               </div>
             </div>
+
             <div class="row">
               <div class="large-12 columns">
                 <label>Target Value</label>
-                <input type="text" placeholder="1.25" />
+                <input type="text" placeholder="1.25" class="tip-top" id="targetValueInput" data-tooltip title="Select a couple of currencies to be able to see their current ratio, and change it to your desired threshold."/>
               </div>
             </div>
-            <div class="row collapse">
+            <div class="row collapse email-field">
               <label>Email Alert</label>
               <div class="large-10 columns">
-                <input type="text" placeholder="name@example.com" />
+                <input type="email" placeholder="name@example.com" class="tip-bottom" id="targetValueEmailInput" data-tooltip title="At the moment the ratio between your selected currencies will reach the threshold input above, an email will be sent to this email address to alert you."/>
               </div>
               <div class="large-2 columns">
-                <a href="#" class="button postfix">Go</a>
+                <button type="submit" class="button postfix" id="targetValueEmailButton">Go</button>
               </div>
             </div>
+
             <div class="row">
               <div class="large-12 columns">
                 <label>Facebook Connect</label>
@@ -324,7 +369,23 @@
     inputHostCurrency.addEventListener("input", currencyHandler, true);
     converterHomeCurrencyTip = document.getElementById("converterHomeCurrencyTip");
     converterHostCurrencyTip = document.getElementById("converterHostCurrencyTip");
+    targetValueInput = document.getElementById("targetValueInput");
+    targetValueEmailInput = document.getElementById("targetValueEmailInput");
+    document.getElementById("targetValueEmailButton").addEventListener("click", setThreshold, false);
     intervalCurrencies = setInterval(currencyHandler, 1000);
+    
+    function setThreshold(){
+      log(targetValueInput.value+" at "+targetValueEmailInput.value+ " for " + window.homeCurrency + " and "+ window.hostCurrency);
+      $.ajax({
+        dataType: "jsonp",
+        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=setthreshold&home="+window.homeCurrency+"&host="+window.hostCurrency+"&ratio="+targetValueInput.value+"&email="+encodeURI(targetValueEmailInput.value)+"&ratioinit="+((window.homeRate/window.hostRate).toFixed(3))+"&callback=mycallback",
+        success: function( response ) {
+          log( response );
+          alert("Target value set");
+        }
+      });
+    }
+
     function currencyHandler(){
       if(checkInput(inputHomeCurrency)){
         log(inputHomeCurrency);
@@ -352,7 +413,11 @@
       }else{
         if(!intervalCurrencies)
           intervalCurrencies = setInterval(currencyHandler, 1000);
+
       }
+    }
+    function changeTargetValueInput(){
+      targetValueInput.value = (window.homeRate/window.hostRate).toFixed(3);
     }
     function getRates(){
 
@@ -377,7 +442,7 @@
         window.hostRate = json[0].value;
       }
       setConverter();
-      
+      changeTargetValueInput();
       
     }
     function setConverter(){
@@ -426,32 +491,32 @@
 
 function getPopularCurrencies(){
   $.ajax({
-        dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getpopularcurrencies"+(window.homeCurrency==""?"":"&home="+window.homeCurrency)+(window.hostCurrency==""?"":"&host="+window.hostCurrency)+"&callback=mycallback",
-        success: function( response ) {
-          log( response );
-          var symboldiv = document.getElementsByClassName("symbol-div");
-          var percentdiv = document.getElementsByClassName("percent-div");
-          var valuediv = document.getElementsByClassName("value-div");
-          var arrowdiv = document.getElementsByClassName("arrow-div");
-          $.each( response, function( key, value ) {
-            symboldiv[key].textContent = value[0].currency_code
-            valuediv[key].textContent = (1/(value[0].value)).toFixed(3);
-            log(value[0].percent);
-            var percent = new Number(value[0].percent);
-            var percentFormatted = percent.toFixed(3);
-            percentdiv[key].textContent = percentFormatted+"%";
-            if(percent>=0){
-              arrowdiv[key].className="arrow-div arrow-up";
-            }else{
-              arrowdiv[key].className="arrow-div arrow-down";
-            }
-          });
-
-
-
+    dataType: "jsonp",
+    url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getpopularcurrencies"+(window.homeCurrency==""?"":"&home="+window.homeCurrency)+(window.hostCurrency==""?"":"&host="+window.hostCurrency)+"&callback=mycallback",
+    success: function( response ) {
+      log( response );
+      var symboldiv = document.getElementsByClassName("symbol-div");
+      var percentdiv = document.getElementsByClassName("percent-div");
+      var valuediv = document.getElementsByClassName("value-div");
+      var arrowdiv = document.getElementsByClassName("arrow-div");
+      $.each( response, function( key, value ) {
+        symboldiv[key].textContent = value[0].currency_code
+        valuediv[key].textContent = (1/(value[0].value)).toFixed(3);
+        log(value[0].percent);
+        var percent = new Number(value[0].percent);
+        var percentFormatted = percent.toFixed(3);
+        percentdiv[key].textContent = percentFormatted+"%";
+        if(percent>=0){
+          arrowdiv[key].className="arrow-div arrow-up";
+        }else{
+          arrowdiv[key].className="arrow-div arrow-down";
         }
       });
+
+
+
+    }
+  });
 }
 
 
@@ -576,5 +641,6 @@ function initialize() {
 google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
+
 </body>
 </html>
