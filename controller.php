@@ -6,7 +6,7 @@ if($_GET["action"]=="getrates"){
 	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 	$one = $_GET["home"];
 	$two = $_GET["host"];
-	$sql = "SELECT `currency_code`, `value` FROM `currencies` WHERE `currency_code`=:var1 OR `currency_code`=:var2 ORDER BY `time` DESC LIMIT 2";
+	$sql = "SELECT `currency_code`, `value` FROM `currencies` WHERE `id` = ( SELECT `id` FROM `currencies` WHERE `currency_code`='EUR' ORDER BY `time` DESC LIMIT 1) OR `id` = ( SELECT `id` FROM `currencies` WHERE `currency_code`='USD' ORDER BY `time` DESC LIMIT 1)";
 	$b=$dbh->prepare($sql);
 	$b->bindParam(":var1",$one);
 	$b->bindParam(":var2",$two);
@@ -26,7 +26,7 @@ if($_GET["action"]=="getcurrencieshistory"){
 	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 	$one = $_GET["home"];
 	$two = $_GET["host"];
-	$sql = "SELECT `currency_code`, `value`, `time` FROM `currencies` WHERE `currency_code`=:var1 OR `currency_code`=:var2 ORDER BY `time` DESC";
+	$sql = "SELECT `currency_code`, `value`, `time` FROM `currencies` WHERE `currency_code`=:var1 OR `currency_code`=:var2 ORDER BY `time` ASC";
 	$b=$dbh->prepare($sql);
 	$b->bindParam(":var1",$one);
 	$b->bindParam(":var2",$two);

@@ -37,11 +37,15 @@ foreach ($res as $row){
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 		$headers .= "From: Kurrency Konverter <kurrencykonverter@lemichel.eu>" . "\r\n";
 		$headers .= 'Reply-To: Kurrency Konverter <kurrencykonverter@lemichel.eu>' . "\r\n";
-		mail($to,$subject,$txt,$headers);
+		$resultMail = mail($to,$subject,$txt,$headers);
 		$sql = "UPDATE `currencies_alerts` SET `done`='1' WHERE `currencies_alerts`.`id`=:id";
 		$b=$dbh->prepare($sql);
 		$b->bindParam(":id",$row["id"]);
 		$b->execute();
+
+		if(DEBUG == true) {
+			error_log(date('[Y-m-d H:i e] '). "Mail to: $to \n Success: $resultMail \n". PHP_EOL, 3, LOG_FILE);
+		}
 	}
 
 }
