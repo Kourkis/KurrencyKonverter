@@ -48,29 +48,36 @@ if($_GET["action"]=="getpopularcurrencies"){
 	$two = $_GET["host"];
 	$tab = array();
 	$currencies = array("GBP", "EUR", "AUD", "CAD", "INR", "CNY");
+	$usedCurrencies = array();
 
 	if(isset($_GET["home"])){
-		
-		$key = array_search($one, $currencies);
+		array_push($usedCurrencies, $one);
+		/*$key = array_search($one, $currencies);
 		if($key){
 			unset($currencies[$key]);
 			$currencies = array_values($currencies);
 		}
-		array_splice($currencies, 0, 0, $one);
+		array_splice($currencies, 0, 0, $one);*/
 	}
 	if(isset($_GET["host"])){
-		
-		$key = array_search($two, $currencies);
+		if($one!=$two)
+		array_push($usedCurrencies, $two);
+		/*$key = array_search($two, $currencies);
 		if($key){
 			unset($currencies[$key]);
 			$currencies = array_values($currencies);
 		}
-		array_splice($currencies, 1, 0, $two);
+		array_splice($currencies, 1, 0, $two);*/
 	}
 	for ($i=0; $i < 6; $i++) { 
-		$sql = "SELECT `currency_code`, `value`, (	(	SELECT `value` FROM `currencies` WHERE `currency_code`=:var1 ORDER BY `time` DESC LIMIT 1)-(	SELECT `value` FROM `currencies` WHERE `time` >= NOW( ) - INTERVAL 1 DAY AND `currency_code`=:var1 ORDER BY `time` ASC LIMIT 1))/(	SELECT `value` FROM `currencies` WHERE `currency_code`=:var1 ORDER BY `time` DESC LIMIT 1)*100 AS `percent` FROM `currencies` WHERE `time` >= NOW( ) - INTERVAL 1 DAY AND (`currency_code`=:var1 ) ORDER BY `time` ASC LIMIT 1";
+		if(!in_array($currencies[$i], $usedCurrencies)){
+			array_push($usedCurrencies, $currencies[$i]);
+		}
+	}
+	for ($i=0; $i < 6; $i++) { 
+		$sql = "SELECT `currency_code`, `value`, (	(	SELECT `value` FROM `currencies` WHERE `currency_code`=:var1 ORDER BY `time` DESC LIMIT 1)-(	SELECT `value` FROM `currencies` WHERE `time` >= NOW( ) - INTERVAL 3 DAY AND `currency_code`=:var1 ORDER BY `time` ASC LIMIT 1))/(	SELECT `value` FROM `currencies` WHERE `currency_code`=:var1 ORDER BY `time` DESC LIMIT 1)*100 AS `percent` FROM `currencies` WHERE `time` >= NOW( ) - INTERVAL 3 DAY AND (`currency_code`=:var1 ) ORDER BY `time` ASC LIMIT 1";
 		$b=$dbh->prepare($sql);
-		$b->bindParam(":var1",$currencies[$i]);
+		$b->bindParam(":var1",$usedCurrencies[$i]);
 		$b->execute();
 		$res = $b->fetchAll(PDO::FETCH_ASSOC);
 		array_push($tab, $res);
@@ -79,9 +86,7 @@ if($_GET["action"]=="getpopularcurrencies"){
 	$json=json_encode($tab);
 	echo $_GET['callback']."(".$json.");";
 	if(DEBUG == true) {
-		//var_dump($res);
-		//var_dump($b);
-		//error_log(date('[Y-m-d H:i e] '). $_GET["action"] . $_GET["home"] . $_GET["host"] ." \n". PHP_EOL, 3, LOG_FILE);
+		//error_log(date('[Y-m-d H:i e] '). $currencies[0] . $currencies[1] . $currencies[2] . $currencies[3] ." \n". PHP_EOL, 3, LOG_FILE);
 	}
 }
 

@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kurrency Konverter</title>
   <link rel="stylesheet" href="css/foundation.css?v=1" />
-  <link rel="stylesheet" href="css/custom.css?v=1"/><!-- Custom stylesheet -->
+  <link rel=" stylesheet" type="text/css" href="css/joyride-2.1.css">
+  <link rel="stylesheet" href="css/custom.css?v=2"/><!-- Custom stylesheet -->
   <link rel="icon" type="image/png" href="img/logo.png"><!-- favicon -->
   <script src="js/vendor/modernizr.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/jquery-ui-1.10.4.custom.js"></script>
+  <script src="js/jquery.joyride-2.1.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script src="js/highstock.js"></script>
   <script>
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-34940415-1']);
@@ -46,10 +52,8 @@
   function checkCookie()
   {
     var data=getCookie("save");
-    if (data!="")
-    {
-      log("cookie retrieved");
-    }
+    log(data);
+    return data!="";
   }
 
   </script>
@@ -215,10 +219,13 @@
               </div>
             </div>
 
-            <div class="row">
-              <div class="large-12 columns">
-                <label>Target Value</label>
+            <div class="row collapse">
+              <label>Target Value</label>
+              <div class="large-10 columns">
                 <input type="text" placeholder="1.25" class="tip-top" id="targetValueInput" data-tooltip title="Select a couple of currencies to be able to see their current ratio, and change it to your desired threshold."/>
+              </div>
+              <div class="large-2 columns">
+                <button type="submit" class="button postfix tip-bottom" id="targetValueResetButton" data-tooltip title="Set the ratio to today's ratio.">Reset</button>
               </div>
             </div>
             <div class="row collapse email-field">
@@ -318,7 +325,7 @@
 
   </div>
 
-    
+
 
   <div data-reveal class="reveal-modal" id="mapModal"><!-- Div containing the Google Map for the currencies use in the world -->
     <h3>Use of selected currencies worldwide</h3>
@@ -327,22 +334,78 @@
     </div>
     <a class="close-reveal-modal">×</a>
   </div>
+  <ol id="joyRideTipContent">
+    <li data-id="inputHomeCurrency" data-options="tipLocation:right;tipAnimation:fade">
+      <h3>Your home currency<h3>
+      <p>First select your home currency</p>
+    </li>
+    <li data-id="inputHostCurrency" data-options="tipLocation:right;tipAnimation:fade">
+      <h3>Your host currency<h3>
+      <p>Then select your host currency</p>
+    </li>
+    <li data-class="converter" data-options="tipLocation:top;tipAnimation:fade">
+      <h3>Convert currencies<h3>
+      <p>Once you have set both currencies, you can convert them from one another...</p>
+    </li>
+    <li data-id="container" data-options="tipLocation:top;tipAnimation:fade">
+      <h3>A graph of both currencies values<h3>
+      <p>... see a graph of both currencies, relative to the USD...</p>
+    </li>
+    <li data-class="prediction" data-options="tipLocation:left;tipAnimation:fade">
+      <h3>Prediction of the next lowest value point<h3>
+      <p>... know when will be the best time for you to withdraw money...</p>
+    </li>
+    <li data-class="threshold" data-options="tipLocation:left;tipAnimation:fade">
+      <h3>Setup an alert<h3>
+      <p>... set a desired ratio value between your host and your home currency, and receive an alert by mail or facebook...</p>
+    </li>
+    <li data-class="map" data-options="tipLocation:right;tipAnimation:fade">
+      <h3>Map of the host currency use<h3>
+      <p>... see where your host currency is used in the world...</p>
+    </li>
+    <li data-class="price-beer" data-options="tipLocation:top;tipAnimation:fade">
+      <h3>Prices of a pint of beer in the world<h3>
+      <p>... and see the relative price of a pint of beer in several countries converted in your home currency!</p>
+    </li>
+  </ol>
+
   <div id="results">
   </div>
-  <script src="js/vendor/jquery.js"></script>
-  <script src="js/jquery-ui-1.10.4.custom.js"></script>
-  <script src="js/foundation.min.js"></script>
-  <script src="js/highstock.js"></script>
+  
+
   <script>
   availableCurrencies = [];
-  window.homeCurrency = "";
-  window.hostCurrency = "";
+  debug = true;/*set to true to see the magic appear in the dev console*/
   function log(thing){
-    console.log(thing);
+    if(debug)
+      console.log(thing);
   }
   $(document).foundation();
 
   $(function() {
+    inputHomeCurrency = document.getElementById("inputHomeCurrency");
+    inputHostCurrency = document.getElementById("inputHostCurrency");
+    converterHomeCurrencyTip = document.getElementById("converterHomeCurrencyTip");
+    converterHostCurrencyTip = document.getElementById("converterHostCurrencyTip");
+    targetValueInput = document.getElementById("targetValueInput");
+    targetValueEmailInput = document.getElementById("targetValueEmailInput");
+
+    if(!checkCookie()){
+      $("#joyRideTipContent").joyride({
+        autoStart : true
+      });
+      window.homeCurrency = "";
+      window.hostCurrency = "";
+    }
+    else{
+      var value = getCookie('save');
+      var currencies = value.split(',');
+      window.homeCurrency = currencies[0];
+      inputHomeCurrency.value = currencies[0];
+      window.hostCurrency = currencies[1];
+      inputHostCurrency.value = currencies[1];
+    }
+
     var query = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+'ISO+code'+++FROM+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+GROUP+BY+'ISO+code'+ORDER+BY+'ISO+code'+ASC&hdrs=false&typed=true&key=AIzaSyCCdCZEl31z9YPzDfX7kNOYY09ErJwCArM"
     $.ajax({
       url: query,
@@ -361,17 +424,12 @@
       log(availableCurrencies);
     });
     getPopularCurrencies();
-    inputHomeCurrency = document.getElementById("inputHomeCurrency");
     inputHomeCurrency.addEventListener("input", currencyHandler, true);
-    inputHostCurrency = document.getElementById("inputHostCurrency");
     inputHostCurrency.addEventListener("input", currencyHandler, true);
-    converterHomeCurrencyTip = document.getElementById("converterHomeCurrencyTip");
-    converterHostCurrencyTip = document.getElementById("converterHostCurrencyTip");
-    targetValueInput = document.getElementById("targetValueInput");
-    targetValueEmailInput = document.getElementById("targetValueEmailInput");
     document.getElementById("targetValueEmailButton").addEventListener("click", setThreshold, false);
+    document.getElementById("targetValueResetButton").addEventListener("click", changeTargetValueInput, false);
     intervalCurrencies = setInterval(currencyHandler, 1000);
-    
+    currencyHandler();
     function setThreshold(){
       log(targetValueInput.value+" at "+targetValueEmailInput.value+ " for " + window.homeCurrency + " and "+ window.hostCurrency);
       $.ajax({
@@ -408,6 +466,7 @@
         drawVisualization();
         clearInterval(intervalCurrencies);
         intervalCurrencies = false;
+        setCookie('save', window.homeCurrency+','+window.hostCurrency);
       }else{
         if(!intervalCurrencies)
           intervalCurrencies = setInterval(currencyHandler, 1000);
@@ -546,17 +605,17 @@
               },*/
               borderRadius: 0,
               plotBackgroundColor: {
-              linearGradient: {
-                    x1: 0, 
-                    y1: 0, 
-                    x2: 1, 
-                    y2: 1
+                linearGradient: {
+                  x1: 0, 
+                  y1: 0, 
+                  x2: 1, 
+                  y2: 1
                 },
                 stops: [
-                  [0, '#BDAEC6'],
-                  [1, '#9C8AA5']
-              ]
-          }
+                [0, '#BDAEC6'],
+                [1, '#9C8AA5']
+                ]
+              }
             }
           });
 }
@@ -639,19 +698,6 @@ function initialize() {
   map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend-open'));
   map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend'));
 
-  layer = new google.maps.FusionTablesLayer({
-    map: map,
-    heatmap: { enabled: false },
-    query: {
-      select: "col14",
-      from: "1brA30s0zsBBH3u6NFn8Lk0i4V31W3fzvSEStct7g",
-      where: "col3 in (\x27USD\x27, \x27EUR\x27)"
-    },
-    options: {
-      styleId: 2,
-      templateId: 2
-    }
-  });
 
   if (isMobile) {
     var legend = document.getElementById('googft-legend');
@@ -701,7 +747,7 @@ function initialize() {
     query: {
       select: "col14",
       from: "1brA30s0zsBBH3u6NFn8Lk0i4V31W3fzvSEStct7g",
-      where: "col3 in (\x27"+ window.homeCurrency +"\x27, \x27"+ window.hostCurrency +"\x27)"
+      where: "col3 in (\x27"+ window.hostCurrency +"\x27)"
     },
     options: {
       styleId: 2,
