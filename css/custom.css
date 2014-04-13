@@ -143,17 +143,18 @@ body{
 }
 .price-beer .beer{
 	height: inherit;
-    opacity: 0.85;
+    opacity: 0.62;
     position: relative;
     z-index: 4;
 }
 .price-beer .flag{
-	display: inline-block;
+	display: block;
     height: inherit;
+    margin: auto;
     position: relative;
     top: -100%;
     vertical-align: middle;
-    width: inherit;
+    width: auto;
     z-index: 3;
 }
 .centered{

@@ -6,7 +6,7 @@
   <title>Kurrency Konverter</title>
   <link rel="stylesheet" href="css/foundation.css?v=1" />
   <link rel=" stylesheet" type="text/css" href="css/joyride-2.1.css">
-  <link rel="stylesheet" href="css/custom.css?v=2"/><!-- Custom stylesheet -->
+  <link rel="stylesheet" href="css/custom.css?v=3"/><!-- Custom stylesheet -->
   <link rel="icon" type="image/png" href="img/logo.png"><!-- favicon -->
   <script src="js/vendor/modernizr.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -449,6 +449,7 @@
         converterHomeCurrencyTip.innerHTML = inputHomeCurrency.value;
         window.homeCurrency = inputHomeCurrency.value;
         getTrend();
+        getBeer();
       }else{
         colorText(inputHomeCurrency,"red");
       }
@@ -477,7 +478,37 @@
     function changeTargetValueInput(){
       targetValueInput.value = (window.homeRate/window.hostRate).toFixed(3);
     }
-
+    function getBeer(){
+      $.ajax({
+        dataType: "jsonp",
+        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getbeerprices&home="+window.homeCurrency+"&callback=mycallback",
+        success: function( response ) {
+          log( response );
+          priceDiv = document.getElementsByClassName("priceDiv");
+          $.each(response, function(key, val) {
+            log(key);
+            var value = parseFloat(val.price);
+            var countryFlag = val.country.replace(/ /g,"_");;
+            priceDiv[key].getElementsByClassName("price")[0].innerHTML=value.toFixed(2);
+            priceDiv[key].getElementsByClassName("flag")[0].alt=val.country;
+            priceDiv[key].getElementsByClassName("flag")[0].src="img/flags/"+countryFlag+".png";
+          });
+        },
+        complete: function(){
+          var query = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+Sign+FROM+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+WHERE+'ISO+code'%3D'EUR'+LIMIT+1&hdrs=false&typed=true&key=AIzaSyCCdCZEl31z9YPzDfX7kNOYY09ErJwCArM"
+          $.ajax({
+            url: query,
+            cache: false
+          })
+          .done(function( json ) {
+              log(json.rows[0][0]);
+              for(var i=0; i < priceDiv.length; i++){
+                priceDiv[i].getElementsByClassName("price")[0].innerHTML = json.rows[0][0] + priceDiv[i].getElementsByClassName("price")[0].innerHTML;
+              }
+          });
+        }
+      });
+    }
     function getTrend(){
       $.ajax({
         dataType: "jsonp",

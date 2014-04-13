@@ -208,4 +208,19 @@ if($_GET["action"]=="gettrend"){
 	$json=json_encode($arr);
 	echo $_GET['callback']."(".$json.");";
 }
+if($_GET["action"]=="getbeerprices"){
+	header("Content-type: application/json");
+	header("Cache-Control: no-cache, must-revalidate");
+	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+	$home = $_GET["home"];
+	$sql = "SELECT `country`, (`price` * ((SELECT `value` FROM `currencies` WHERE `id` = ( SELECT `id` FROM `currencies` WHERE `currency_code`=:home ORDER BY `time` DESC LIMIT 1)))/(SELECT `value` FROM `currencies` WHERE `id` = ( SELECT `id` FROM `currencies` WHERE `currency_code`='GBP' ORDER BY `time` DESC LIMIT 1))) AS price FROM `currencies_beer` ORDER BY RAND() LIMIT 6";
+	//$sql = "SELECT `value` FROM `currencies` WHERE `currency_code`=:home  ORDER BY `time` ASC";
+	$b=$dbh->prepare($sql);
+	$b->bindParam(":home",$home);
+	$b->execute();
+	$res = $b->fetchAll(PDO::FETCH_ASSOC);
+	$json=json_encode($res);
+	echo $_GET['callback']."(".$json.");";
+
+}
 ?>
