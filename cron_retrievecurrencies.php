@@ -5,7 +5,7 @@ require dirname(__FILE__).'/connect.php';
 $contents = file_get_contents('http://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json');
 $results = json_decode($contents, true); 
 
-$sql = "INSERT INTO `micheltest`.`currencies` (`currency_code`, `value`, `time`) VALUES ";
+$sql = "INSERT INTO `currencies` (`currency_code`, `value`, `time`) VALUES ";
 $max = count($results["list"]["resources"]);
 for ($i=0; $i < $max; $i++) { 
 	$timearray = explode("+", $results["list"]["resources"][$i]["resource"]["fields"]["utctime"]);

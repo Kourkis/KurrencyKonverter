@@ -150,7 +150,7 @@ if($_GET["action"]=="setthreshold"){
 	$email = $_GET["email"];
 	$ratioinit = $_GET["ratioinit"];
 	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		$sql = "INSERT INTO `micheltest`.`currencies_alerts` (`homecurrency`, `hostcurrency`, `ratio`, `email`, `ratioinit`) VALUES (:home, :host, :ratio, :email, :ratioinit)";
+		$sql = "INSERT INTO `currencies_alerts` (`homecurrency`, `hostcurrency`, `ratio`, `email`, `ratioinit`) VALUES (:home, :host, :ratio, :email, :ratioinit)";
 		$b=$dbh->prepare($sql);
 		$b->bindParam(":home",$home);
 		$b->bindParam(":host",$host);
