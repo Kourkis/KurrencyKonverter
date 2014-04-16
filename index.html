@@ -4,143 +4,133 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kurrency Konverter</title>
-  <link rel="stylesheet" href="css/foundation.css?v=1" />
+  <link rel="stylesheet" href="css/foundation.css" />
   <link rel=" stylesheet" type="text/css" href="css/joyride-2.1.css">
-  <link rel="stylesheet" href="css/custom.css?v=3"/><!-- Custom stylesheet -->
+  <link rel="stylesheet" href="css/custom.css"/><!-- Custom stylesheet -->
   <link rel="icon" type="image/png" href="img/logo.png"><!-- favicon -->
   <script src="js/vendor/modernizr.js"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="js/vendor/jquery.js"></script>
-  <script src="js/jquery-ui-1.10.4.custom.js"></script>
-  <script src="js/jquery.joyride-2.1.js"></script>
+  <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
   <script src="js/foundation.min.js"></script>
+  <script src="js/jquery.joyride-2.1.js"></script>
   <script src="js/highstock.js"></script>
+  <script src="js/custom.js"></script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-34940415-1', 'lemichel.eu');
   ga('require', 'displayfeatures');
   ga('send', 'pageview');
-
-</script>
-  <script type="text/javascript">
-
-  function setCookie(cname,cvalue)
-  {
-    var d = new Date();
-    d.setTime(d.getTime()+(365*24*60*60*1000));
-    var expires = "expires="+d.toGMTString();
-    document.cookie = cname + "=" + cvalue + "; " + expires;
-  }
-
-  function getCookie(cname)
-  {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++)
-    {
-      var c = ca[i].trim();
-      if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-    }
-    return "";
-  }
-
-  function checkCookie()
-  {
-    var data=getCookie("save");
-    log(data);
-    return data!="";
-  }
-
   </script>
 </head>
 <body>
-  <div class="row">
+
+  <div class="row"><!-- First row -->
+
     <div class="medium-2 large-2 columns">
       <div class="row">
         <div class="small-12 columns">
           <div class="logo-div color4"><!-- Div containing the logo -->
-            <div class="centered"><img src="img/logo.png" alt="logo"></div>
+            <div class="centered"><h1><img src="img/logo.png" alt="Kurrency Konverter"></h1></div>
           </div>
         </div>
       </div>
     </div>
-    <div class="medium-12 large-10 columns ">
+
+    <div class="medium-10 large-10 columns ">
       <div class="row ">
         <div class="small-12 columns">
           <div class="top-currencies-div color4"><!-- Div containing the top currencies -->
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="symbol-div">GBP</div>
+                <div class="symbol-div"></div>
                 <div class="data-div">
-                  <div class="percent-div">1.2%</div>
-                  <div class="value-div">1.000</div>
+                  <div class="percent-div"></div>
+                  <div class="value-div"></div>
                 </div>
-                <div class="arrow-div arrow-up"></div>
+                <div class="arrow-div"></div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="symbol-div">EUR</div>
+                <div class="symbol-div"></div>
                 <div class="data-div">
-                  <div class="percent-div">0.20%</div>
-                  <div class="value-div">1.197</div>
+                  <div class="percent-div"></div>
+                  <div class="value-div"></div>
                 </div>
-                <div class="arrow-div arrow-up"></div>
+                <div class="arrow-div"></div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="symbol-div">USD</div>
+                <div class="symbol-div"></div>
                 <div class="data-div">
-                  <div class="percent-div">0.30%</div>
-                  <div class="value-div">1.668</div>
+                  <div class="percent-div"></div>
+                  <div class="value-div"></div>
                 </div>
-                <div class="arrow-div arrow-up"></div>
+                <div class="arrow-div"></div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="symbol-div">INR</div>
+                <div class="symbol-div"></div>
                 <div class="data-div">
-                  <div class="percent-div">0.19%</div>
-                  <div class="value-div">102.0</div>
+                  <div class="percent-div"></div>
+                  <div class="value-div"></div>
                 </div>
-                <div class="arrow-div arrow-up"></div>
+                <div class="arrow-div"></div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="symbol-div">AUD</div>
+                <div class="symbol-div"></div>
                 <div class="data-div">
-                  <div class="percent-div">-0.33%</div>
-                  <div class="value-div">1.842</div>
+                  <div class="percent-div"></div>
+                  <div class="value-div"></div>
                 </div>
-                <div class="arrow-div arrow-down"></div>
+                <div class="arrow-div"></div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="symbol-div">CAD</div>
+                <div class="symbol-div"></div>
                 <div class="data-div">
-                  <div class="percent-div">-0.24%</div>
-                  <div class="value-div">1.843</div>
+                  <div class="percent-div"></div>
+                  <div class="value-div"></div>
                 </div>
-                <div class="arrow-div arrow-down"></div>
+                <div class="arrow-div"></div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </div><!-- End first row -->
 
-  <div class="row second-line">
-    <div class="medium-6 large-3 columns">
+  <div class="row second-line"><!-- Second row -->
+
+    <div class="medium-12 large-6 large-push-3 columns">
+      <div class="row ">
+        <div class="small-12 columns">
+          <div class="small-box graph color3"><!-- Div containing the graph -->
+            <div id="container" style="height: 400px; min-width: 310px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="medium-6 large-3 large-pull-6 columns">
       <div class="row ">
         <div class="small-12 columns">
           <div class="small-box converter-inputs color2"><!-- Div containing the inputs and the converter -->
@@ -178,27 +168,11 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="small-box map color2"><!-- Div containing the image to display the popup map -->
-            <div class="centered">Currency use in the world</div>
-            <a data-reveal-id="mapModal" href="#"><img src="img/worldmap_currencies_small.png"  alt="Worldmap of currencies"></a>
-          </div>
+          </div><!-- End div containing inputs & converter -->
         </div>
       </div>
     </div>
-    <div class="medium-12 large-6 columns">
-      <div class="row ">
-        <div class="small-12 columns">
-          <div class="small-box graph color3"><!-- Div containing the graph -->
-            <div id="container" style="height: 400px; min-width: 310px"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <div class="medium-6 large-3 columns">
       <div class="row ">
         <div class="small-12 columns">
@@ -209,6 +183,8 @@
         </div>
       </div>
     </div>
+
+
     <div class="medium-6 large-3 columns">
       <div class="row">
         <div class="small-12 columns">
@@ -221,595 +197,178 @@
 
             <div class="row collapse">
               <label>Target Value</label>
-              <div class="large-10 columns">
-                <input type="text" placeholder="1.25" class="tip-top" id="targetValueInput" data-tooltip title="Select a couple of currencies to be able to see their current ratio, and change it to your desired threshold."/>
+              <div class="large-10 medium-10 columns">
+                <input type="text" class="tip-top" id="targetValueInput" data-tooltip title="Select a couple of currencies to be able to see their current ratio, and change it to your desired threshold."/>
               </div>
-              <div class="large-2 columns">
+              <div class="large-2 medium-2 columns">
                 <button type="submit" class="button postfix tip-bottom" id="targetValueResetButton" data-tooltip title="Set the ratio to today's ratio.">Reset</button>
               </div>
             </div>
+
             <div class="row collapse email-field">
               <label>Email Alert</label>
-              <div class="large-10 columns">
+              <div class="large-10 medium-10 columns">
                 <input type="email" placeholder="name@example.com" class="tip-bottom" id="targetValueEmailInput" data-tooltip title="At the moment the ratio between your selected currencies will reach the threshold input above, an email will be sent to this email address to alert you."/>
               </div>
-              <div class="large-2 columns">
+              <div class="large-2 medium-2 columns">
                 <button type="submit" class="button postfix" id="targetValueEmailButton">Go</button>
               </div>
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
               <div class="large-12 columns">
                 <label>Facebook Connect</label>
                 <img src="img/facebooklogin.png"  alt="Facebook Login Button">
               </div>
-            </div>
+            </div> -->
+
           </div>
         </div>
       </div>
     </div>
+  </div><!-- End second row-->
+
+  <div class="row"><!-- Third row -->
+
+    <div class="medium-3 columns">
+      <div class="row">
+        <div class="small-12 columns">
+          <div class="small-box map color2"><!-- Div containing the image to display the popup map -->
+            <div class="centered">Currency use in the world</div>
+            <a data-reveal-id="mapModal" href=""><img src="img/worldmap_currencies_small.png"  alt="Worldmap of currencies"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    
     <div class="small-12 medium-9 columns">
       <div class="row ">
         <div class="small-12 columns">
           <div class="price-beer color4"><!-- Div containing the price of beers in the world -->
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="priceDiv">
-                  <div class="price">£2.75</div>
+                <div class="priceDiv" title="">
+                  <div class="price"></div>
                   <div class="images">
                     <img src="img/beer.png" class="beer" alt="beer">
-                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                    <img src="" class="flag" alt="">
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="priceDiv">
-                  <div class="price">£2.75</div>
+                <div class="priceDiv" title="">
+                  <div class="price"></div>
                   <div class="images">
                     <img src="img/beer.png" class="beer" alt="beer">
-                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                    <img src="" class="flag" alt="">
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="priceDiv">
-                  <div class="price">£2.75</div>
+                <div class="priceDiv" title="">
+                  <div class="price"></div>
                   <div class="images">
                     <img src="img/beer.png" class="beer" alt="beer">
-                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                    <img src="" class="flag" alt="">
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="priceDiv">
-                  <div class="price">£2.75</div>
+                <div class="priceDiv" title="">
+                  <div class="price"></div>
                   <div class="images">
                     <img src="img/beer.png" class="beer" alt="beer">
-                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                    <img src="" class="flag" alt="">
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="priceDiv">
-                  <div class="price">£2.75</div>
+                <div class="priceDiv" title="">
+                  <div class="price"></div>
                   <div class="images">
                     <img src="img/beer.png" class="beer" alt="beer">
-                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                    <img src="" class="flag" alt="">
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="small-2 columns box">
               <div class="small-box color2">
-                <div class="priceDiv">
-                  <div class="price">£2.75</div>
+                <div class="priceDiv" title="">
+                  <div class="price"></div>
                   <div class="images">
                     <img src="img/beer.png" class="beer" alt="beer">
-                    <img src="img/ukflag.jpg" class="flag" alt="flag-uk">
+                    <img src="" class="flag" alt="">
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
-
-  </div>
-
+  </div><!-- End third row -->
 
 
-  <div data-reveal class="reveal-modal" id="mapModal"><!-- Div containing the Google Map for the currencies use in the world -->
+  <div  class="reveal-modal" id="mapModal" data-reveal><!-- Div containing the Google Map for the currencies use in the world -->
     <h3>Use of selected currencies worldwide</h3>
     <div id="worldmap">
       <div id="googft-mapCanvas" class="map"></div>
     </div>
     <a class="close-reveal-modal">×</a>
   </div>
-  <ol id="joyRideTipContent">
+
+  <ol id="joyRideTipContent"><!-- List for the step by step introduction to the website -->
     <li data-id="inputHomeCurrency" data-options="tipLocation:right;tipAnimation:fade">
-      <h3>Your home currency<h3>
+      <h3>Your home currency</h3>
       <p>First select your home currency</p>
     </li>
     <li data-id="inputHostCurrency" data-options="tipLocation:right;tipAnimation:fade">
-      <h3>Your host currency<h3>
+      <h3>Your host currency</h3>
       <p>Then select your host currency</p>
     </li>
     <li data-class="converter" data-options="tipLocation:top;tipAnimation:fade">
-      <h3>Convert currencies<h3>
+      <h3>Convert currencies</h3>
       <p>Once you have set both currencies, you can convert them from one another...</p>
     </li>
     <li data-id="container" data-options="tipLocation:top;tipAnimation:fade">
-      <h3>A graph of both currencies values<h3>
+      <h3>A graph of both currencies values</h3>
       <p>... see a graph of both currencies, relative to the USD...</p>
     </li>
     <li data-class="prediction" data-options="tipLocation:left;tipAnimation:fade">
-      <h3>Prediction of the next lowest value point<h3>
+      <h3>Prediction of the next lowest value point</h3>
       <p>... know when will be the best time for you to withdraw money...</p>
     </li>
     <li data-class="threshold" data-options="tipLocation:left;tipAnimation:fade">
-      <h3>Setup an alert<h3>
+      <h3>Setup an alert</h3>
       <p>... set a desired ratio value between your host and your home currency, and receive an alert by mail or facebook...</p>
     </li>
     <li data-class="map" data-options="tipLocation:right;tipAnimation:fade">
-      <h3>Map of the host currency use<h3>
+      <h3>Map of the host currency use</h3>
       <p>... see where your host currency is used in the world...</p>
     </li>
     <li data-class="price-beer" data-options="tipLocation:top;tipAnimation:fade">
-      <h3>Prices of a pint of beer in the world<h3>
+      <h3>Prices of a pint of beer in the world</h3>
       <p>... and see the relative price of a pint of beer in several countries converted in your home currency!</p>
     </li>
   </ol>
-
-  <div id="results">
-  </div>
-  
-
-  <script>
-  availableCurrencies = [];
-  debug = true;/*set to true to see the magic appear in the dev console*/
-  function log(thing){
-    if(debug)
-      console.log(thing);
-  }
-  $(document).foundation();
-
-  $(function() {
-    inputHomeCurrency = document.getElementById("inputHomeCurrency");
-    inputHostCurrency = document.getElementById("inputHostCurrency");
-    converterHomeCurrencyTip = document.getElementById("converterHomeCurrencyTip");
-    converterHostCurrencyTip = document.getElementById("converterHostCurrencyTip");
-    targetValueInput = document.getElementById("targetValueInput");
-    targetValueEmailInput = document.getElementById("targetValueEmailInput");
-
-    if(!checkCookie()){
-      $("#joyRideTipContent").joyride({
-        autoStart : true
-      });
-      window.homeCurrency = "";
-      window.hostCurrency = "";
-    }
-    else{
-      var value = getCookie('save');
-      var currencies = value.split(',');
-      window.homeCurrency = currencies[0];
-      inputHomeCurrency.value = currencies[0];
-      window.hostCurrency = currencies[1];
-      inputHostCurrency.value = currencies[1];
-    }
-
-    var query = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+'ISO+code'+++FROM+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+GROUP+BY+'ISO+code'+ORDER+BY+'ISO+code'+ASC&hdrs=false&typed=true&key=AIzaSyCCdCZEl31z9YPzDfX7kNOYY09ErJwCArM"
-    $.ajax({
-      url: query,
-      cache: false
-    })
-    .done(function( json ) {
-      for (var i = 0; i< json.rows.length; i++) {
-        availableCurrencies.push(json.rows[i][0]);
-      };
-      $( ".currencyselector" ).autocomplete({
-        source: availableCurrencies,
-        autoFocus: true,
-        delay: 500
-      });
-      $('.ui-autocomplete').addClass('f-dropdown');
-      log(availableCurrencies);
-    });
-    getPopularCurrencies();
-    inputHomeCurrency.addEventListener("input", currencyHandler, true);
-    inputHostCurrency.addEventListener("input", currencyHandler, true);
-    document.getElementById("targetValueEmailButton").addEventListener("click", setThreshold, false);
-    document.getElementById("targetValueResetButton").addEventListener("click", changeTargetValueInput, false);
-    intervalCurrencies = setInterval(currencyHandler, 1000);
-    currencyHandler();
-    function setThreshold(){
-      log(targetValueInput.value+" at "+targetValueEmailInput.value+ " for " + window.homeCurrency + " and "+ window.hostCurrency);
-      $.ajax({
-        dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=setthreshold&home="+window.homeCurrency+"&host="+window.hostCurrency+"&ratio="+targetValueInput.value+"&email="+encodeURI(targetValueEmailInput.value)+"&ratioinit="+((window.homeRate/window.hostRate).toFixed(3))+"&callback=mycallback",
-        success: function( response ) {
-          log( response );
-          alert("Target value set");
-        }
-      });
-    }
-
-    function currencyHandler(){
-      if(checkInput(inputHomeCurrency)){
-        log(inputHomeCurrency);
-        colorText(inputHomeCurrency,"green");
-        converterHomeCurrencyTip.innerHTML = inputHomeCurrency.value;
-        window.homeCurrency = inputHomeCurrency.value;
-        getTrend();
-        getBeer();
-      }else{
-        colorText(inputHomeCurrency,"red");
-      }
-      if(checkInput(inputHostCurrency)){
-        log(inputHostCurrency);
-        colorText(inputHostCurrency,"green");
-        converterHostCurrencyTip.innerHTML = inputHostCurrency.value;
-        window.hostCurrency = inputHostCurrency.value;
-      }else{
-        colorText(inputHostCurrency,"red");
-      }
-      if(checkInput(inputHomeCurrency) && checkInput(inputHostCurrency)){
-        log("2 currencies selected, let's rock");
-        getRates();
-        getPopularCurrencies();
-        drawVisualization();
-        clearInterval(intervalCurrencies);
-        intervalCurrencies = false;
-        setCookie('save', window.homeCurrency+','+window.hostCurrency);
-      }else{
-        if(!intervalCurrencies)
-          intervalCurrencies = setInterval(currencyHandler, 1000);
-
-      }
-    }
-    function changeTargetValueInput(){
-      targetValueInput.value = (window.homeRate/window.hostRate).toFixed(3);
-    }
-    function getBeer(){
-      $.ajax({
-        dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getbeerprices&home="+window.homeCurrency+"&callback=mycallback",
-        success: function( response ) {
-          log( response );
-          priceDiv = document.getElementsByClassName("priceDiv");
-          $.each(response, function(key, val) {
-            log(key);
-            var value = parseFloat(val.price);
-            var countryFlag = val.country.replace(/ /g,"_");;
-            priceDiv[key].getElementsByClassName("price")[0].innerHTML=value.toFixed(2);
-            priceDiv[key].getElementsByClassName("flag")[0].alt=val.country;
-            priceDiv[key].getElementsByClassName("flag")[0].src="img/flags/"+countryFlag+".png";
-          });
-        },
-        complete: function(){
-          var query = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+Sign+FROM+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+WHERE+'ISO+code'%3D'EUR'+LIMIT+1&hdrs=false&typed=true&key=AIzaSyCCdCZEl31z9YPzDfX7kNOYY09ErJwCArM"
-          $.ajax({
-            url: query,
-            cache: false
-          })
-          .done(function( json ) {
-              log(json.rows[0][0]);
-              for(var i=0; i < priceDiv.length; i++){
-                priceDiv[i].getElementsByClassName("price")[0].innerHTML = json.rows[0][0] + priceDiv[i].getElementsByClassName("price")[0].innerHTML;
-              }
-          });
-        }
-      });
-    }
-    function getTrend(){
-      $.ajax({
-        dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=gettrend&home="+window.homeCurrency+"&callback=mycallback",
-        success: function( response ) {
-          log( response );
-          document.getElementById("trend").innerHTML = response.trend;
-        }
-      });
-    }
-    function getRates(){
-
-      $.ajax({
-        dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getrates&home="+window.homeCurrency+"&host="+window.hostCurrency+"&callback=mycallback",
-        success: function( response ) {
-          saveRates( response );
-        }
-      });
-
-      log("getRates() finished");
-    }
-    function saveRates( json ){
-      log(json[0]);
-      log(json[1]);
-      if(json[1]!== undefined){
-        if(json[0].currency_code==window.homeCurrency){
-          window.homeRate = json[0].value;
-          window.hostRate = json[1].value;
-        }else{
-          window.homeRate = json[1].value;
-          window.hostRate = json[0].value;
-        }
-      }
-      else
-      {
-        window.homeRate = json[0].value;
-      }
-      setConverter();
-      changeTargetValueInput();
-      
-    }
-    function setConverter(){
-      converterHomeCurrency = document.getElementById("converterHomeCurrency");
-      converterHomeCurrency.addEventListener("input", converter, true);
-      converterHostCurrency = document.getElementById("converterHostCurrency");
-      converterHostCurrency.addEventListener("input", converter, true);
-      converterHomeCurrency.placeholder = (1/window.homeRate*window.hostRate).toFixed(3);
-      converterHostCurrency.placeholder = (1/window.hostRate*window.homeRate).toFixed(3);
-    }
-    function drawVisualization() {
-      $.ajax({
-        dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getcurrencieshistory&home="+window.homeCurrency+"&host="+window.hostCurrency+"&callback=mycallback",
-        success: function( response ) {
-          log(response);
-
-          data1 = [];
-          data2 = [];
-          $.each(response, function(key, val) {
-            value = parseFloat(val.value);
-            date = parseDate(val.time);
-            if(val.currency_code==window.homeCurrency){
-              data1.push([date.getTime(), value]);
-            }
-            else{
-              data2.push([date.getTime(), value]);
-            }
-          });
-
-
-
-          $('#container').highcharts('StockChart', {
-            rangeSelector : {
-              selected : 1,
-              inputEnabled: $('#container').width() > 500,
-              buttons : [{
-                type: 'day',
-                count: 1,
-                text: '1d'
-              }, {
-                type: 'day',
-                count: 7,
-                text: '7d'
-              }, {
-                type: 'month',
-                count: 1,
-                text: '1m'
-              }, {
-                type: 'month',
-                count: 6,
-                text: '6m'
-              }, {
-                type: 'year',
-                count: 1,
-                text: '1y'
-              }, {
-                type: 'all',
-                text: 'All'
-              }]
-            },
-
-            yAxis: {
-              labels: {
-                formatter: function() {
-                  return (this.value > 0 ? '+' : '') + this.value + '%';
-                }
-              }
-            },
-            plotOptions: {
-              series: {
-                compare: 'percent'
-              }
-            }, 
-
-            title : {
-              text : window.homeCurrency+' vs '+window.hostCurrency
-            },
-            
-            series : [{
-              name: window.homeCurrency,
-              data: data1,
-              pointInterval: 3600 * 1000,
-            }, 
-            {
-              name: window.hostCurrency,
-              data: data2,
-              pointInterval: 3600 * 1000,
-            }],
-
-            chart: {
-              /*backgroundColor: {
-                linearGradient: {
-                  x1: 0, 
-                  y1: 0, 
-                  x2: 1, 
-                  y2: 1
-                },
-                stops: [
-                [0, '#BDAEC6'],
-                [1, '#9C8AA5']
-                ]
-              },*/
-              borderRadius: 0,
-              plotBackgroundColor: {
-                linearGradient: {
-                  x1: 0, 
-                  y1: 0, 
-                  x2: 1, 
-                  y2: 1
-                },
-                stops: [
-                [0, '#BDAEC6'],
-                [1, '#9C8AA5']
-                ]
-              }
-            }
-          });
-}
-});
-}
-
-function getPopularCurrencies(){
-  $.ajax({
-    dataType: "jsonp",
-    url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getpopularcurrencies"+(window.homeCurrency==""?"":"&home="+window.homeCurrency)+(window.hostCurrency==""?"":"&host="+window.hostCurrency)+"&callback=mycallback",
-    success: function( response ) {
-      log( response );
-      var symboldiv = document.getElementsByClassName("symbol-div");
-      var percentdiv = document.getElementsByClassName("percent-div");
-      var valuediv = document.getElementsByClassName("value-div");
-      var arrowdiv = document.getElementsByClassName("arrow-div");
-      $.each( response, function( key, value ) {
-        symboldiv[key].textContent = value[0].currency_code
-        valuediv[key].textContent = (1/(value[0].value)).toFixed(3);
-        log(value[0].percent);
-        var percent = new Number(value[0].percent);
-        var percentFormatted = percent.toFixed(3);
-        percentdiv[key].textContent = percentFormatted+"%";
-        if(percent>=0){
-          arrowdiv[key].className="arrow-div arrow-up";
-        }else{
-          arrowdiv[key].className="arrow-div arrow-down";
-        }
-      });
-
-
-
-    }
-  });
-}
-
-
-function parseDate(date) {
-  var m = /^(\d{4})-(\d\d)-(\d\d) (\d\d):(\d\d):(\d\d)/.exec(date);
-  var tzOffset = new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5], +m[6]).getTimezoneOffset();
-
-  return new Date(+m[1], +m[2] - 1, +m[3], +m[4], +m[5] - tzOffset, +m[6]);
-}
-
-function converter(e){
-  if(e.target==converterHomeCurrency){
-    converterHostCurrency.value = (converterHomeCurrency.value/window.homeRate*window.hostRate).toFixed(3);
-  }else{
-    converterHomeCurrency.value = (converterHostCurrency.value/window.hostRate*window.homeRate).toFixed(3);
-  }
-}
-
-function colorText(elem,color){
-  elem.style.color=color;
-}
-function checkInput(input){
-  return ( availableCurrencies.indexOf(input.value) == -1 ) ? false : true;
-}
-
-});
-
-</script>
-<script type="text/javascript">
-function initialize() {
-  google.maps.visualRefresh = true;
-  var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
-  (navigator.userAgent.match(/(iPod|iPhone|iPad|BlackBerry|Windows Phone|iemobile)/));
-  if (isMobile) {
-    var viewport = document.querySelector("meta[name=viewport]");
-    viewport.setAttribute('content', 'initial-scale=1.0, user-scalable=no');
-  }
-  var mapDiv = document.getElementById('googft-mapCanvas');
-  mapDiv.style.width = isMobile ? '100%' : '100%';
-  mapDiv.style.height = isMobile ? '100%' : '90%';
-  map = new google.maps.Map(mapDiv, {
-    center: new google.maps.LatLng(0.0, 0.0),
-    zoom: 2,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend-open'));
-  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend'));
-
-
-  if (isMobile) {
-    var legend = document.getElementById('googft-legend');
-    var legendOpenButton = document.getElementById('googft-legend-open');
-    var legendCloseButton = document.getElementById('googft-legend-close');
-    legend.style.display = 'none';
-    legendOpenButton.style.display = 'block';
-    legendCloseButton.style.display = 'block';
-    legendOpenButton.onclick = function() {
-      legend.style.display = 'block';
-      legendOpenButton.style.display = 'none';
-    }
-    legendCloseButton.onclick = function() {
-      legend.style.display = 'none';
-      legendOpenButton.style.display = 'block';
-    }
-  }
-  $(document).on('open', '[data-reveal]', function () {
-
-
-    /*layer.setOptions({
-      query: {
-        select: "col14",
-        from: "1brA30s0zsBBH3u6NFn8Lk0i4V31W3fzvSEStct7g"
-      }
-    });*/
-
-
-});
-  $(document).on('opened', '[data-reveal]', function () {
-    google.maps.event.trigger(window.map, 'resize');
-    window.map = new google.maps.Map(mapDiv, {
-      center: new google.maps.LatLng(20.0, 0.0),
-      zoom: 2,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-    /*layer.setOptions({
-      query: {
-        select: "col14",
-        from: "1brA30s0zsBBH3u6NFn8Lk0i4V31W3fzvSEStct7g",
-        where: "col3 in (\x27"+ window.homeCurrency +"\x27, \x27"+ window.hostCurrency +"\x27)"
-      }
-    });*/
-  layer = new google.maps.FusionTablesLayer({
-    map: window.map,
-    heatmap: { enabled: false },
-    query: {
-      select: "col7",
-      from: "1brA30s0zsBBH3u6NFn8Lk0i4V31W3fzvSEStct7g",
-      where: "col3 in (\x27"+ window.hostCurrency +"\x27)"
-    },
-    options: {
-      styleId: 2,
-      templateId: 2
-    }
-  });
-});
-  window.map = map;
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-</script>
 
 </body>
 </html>

@@ -7,7 +7,7 @@ $res = $b->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($res as $row){
     
-    $sql = "SELECT `currency_code`, `value`, `time` FROM `currencies` WHERE `currency_code`=:var1 OR `currency_code`=:var2 ORDER BY `time` DESC LIMIT 2";
+    $sql = "SELECT `currency_code`, `value`, `time` FROM `currencies` WHERE `id` = ( SELECT `id` FROM `currencies` WHERE `currency_code`=:var1 ORDER BY `time` DESC LIMIT 1) OR `id` = ( SELECT `id` FROM `currencies` WHERE `currency_code`=:var2 ORDER BY `time` DESC LIMIT 1)";
 	$b=$dbh->prepare($sql);
 	$b->bindParam(":var1",$row["homecurrency"]);
 	$b->bindParam(":var2",$row["hostcurrency"]);
@@ -35,7 +35,7 @@ foreach ($res as $row){
 		$txt .= "</body></html>";
 		$headers = "MIME-Version: 1.0" . "\r\n";
 		$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-		$headers .= "From: Kurrency Konverter <kurrencykonverter@lemichel.eu>" . "\r\n";
+		$headers .= "From: Kurrency Konverter <kurrencykonverter@gmail.com>" . "\r\n";
 		$headers .= 'Reply-To: Kurrency Konverter <kurrencykonverter@lemichel.eu>' . "\r\n";
 		$resultMail = mail($to,$subject,$txt,$headers);
 		$sql = "UPDATE `currencies_alerts` SET `done`='1' WHERE `currencies_alerts`.`id`=:id";
@@ -47,10 +47,6 @@ foreach ($res as $row){
 			error_log(date('[Y-m-d H:i e] '). "Mail to: $to \n Success: $resultMail \n". PHP_EOL, 3, LOG_FILE);
 		}
 	}
-
 }
-
-
-
 
 ?>

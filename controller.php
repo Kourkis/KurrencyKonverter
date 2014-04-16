@@ -87,11 +87,7 @@ if($_GET["action"]=="getrates"){
 	$res = $b->fetchAll(PDO::FETCH_ASSOC);
 	$json=json_encode($res);
 	echo $_GET['callback']."(".$json.");";
-	if(DEBUG == true) {
-		//var_dump($res);
-		//var_dump($b);
-		//error_log(date('[Y-m-d H:i e] '). $_GET["action"] . $_GET["home"] . $_GET["host"] ." \n". PHP_EOL, 3, LOG_FILE);
-	}
+
 }
 if($_GET["action"]=="getcurrencieshistory"){
 	header("Content-type: application/json");
@@ -107,11 +103,7 @@ if($_GET["action"]=="getcurrencieshistory"){
 	$res = $b->fetchAll(PDO::FETCH_ASSOC);
 	$json=json_encode($res);
 	echo $_GET['callback']."(".$json.");";
-	if(DEBUG == true) {
-		//var_dump($res);
-		//var_dump($b);
-		//error_log(date('[Y-m-d H:i e] '). $_GET["action"] . $_GET["home"] . $_GET["host"] ." \n". PHP_EOL, 3, LOG_FILE);
-	}
+
 }
 if($_GET["action"]=="getpopularcurrencies"){
 	header("Content-type: application/json");
@@ -125,22 +117,10 @@ if($_GET["action"]=="getpopularcurrencies"){
 
 	if(isset($_GET["home"])){
 		array_push($usedCurrencies, $one);
-		/*$key = array_search($one, $currencies);
-		if($key){
-			unset($currencies[$key]);
-			$currencies = array_values($currencies);
-		}
-		array_splice($currencies, 0, 0, $one);*/
 	}
 	if(isset($_GET["host"])){
 		if($one!=$two)
 		array_push($usedCurrencies, $two);
-		/*$key = array_search($two, $currencies);
-		if($key){
-			unset($currencies[$key]);
-			$currencies = array_values($currencies);
-		}
-		array_splice($currencies, 1, 0, $two);*/
 	}
 	for ($i=0; $i < 6; $i++) { 
 		if(!in_array($currencies[$i], $usedCurrencies)){
@@ -158,9 +138,6 @@ if($_GET["action"]=="getpopularcurrencies"){
 
 	$json=json_encode($tab);
 	echo $_GET['callback']."(".$json.");";
-	if(DEBUG == true) {
-		//error_log(date('[Y-m-d H:i e] '). $currencies[0] . $currencies[1] . $currencies[2] . $currencies[3] ." \n". PHP_EOL, 3, LOG_FILE);
-	}
 }
 
 if($_GET["action"]=="setthreshold"){
@@ -172,17 +149,26 @@ if($_GET["action"]=="setthreshold"){
 	$ratio = $_GET["ratio"];
 	$email = $_GET["email"];
 	$ratioinit = $_GET["ratioinit"];
-	$sql = "INSERT INTO `micheltest`.`currencies_alerts` (`homecurrency`, `hostcurrency`, `ratio`, `email`, `ratioinit`) VALUES (:home, :host, :ratio, :email, :ratioinit)";
-	$b=$dbh->prepare($sql);
-	$b->bindParam(":home",$home);
-	$b->bindParam(":host",$host);
-	$b->bindParam(":ratio",$ratio);
-	$b->bindParam(":email",$email);
-	$b->bindParam(":ratioinit",$ratioinit);
-	$b->execute();
-	$res = $b->fetchAll(PDO::FETCH_ASSOC);
-	$json=json_encode($res);
-	echo $_GET['callback']."(".$json.");";
+	if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		$sql = "INSERT INTO `micheltest`.`currencies_alerts` (`homecurrency`, `hostcurrency`, `ratio`, `email`, `ratioinit`) VALUES (:home, :host, :ratio, :email, :ratioinit)";
+		$b=$dbh->prepare($sql);
+		$b->bindParam(":home",$home);
+		$b->bindParam(":host",$host);
+		$b->bindParam(":ratio",$ratio);
+		$b->bindParam(":email",$email);
+		$b->bindParam(":ratioinit",$ratioinit);
+		$b->execute();
+		$res = $b->fetchAll(PDO::FETCH_ASSOC);
+		$arr = array('status' => 'ok');
+		$json=json_encode($arr);
+		echo $_GET['callback']."(".$json.");"; 
+	}
+	else{
+		$arr = array('status' => 'bademail');
+		$json=json_encode($arr);
+		echo $_GET['callback']."(".$json.");"; 
+	}
+	
 }
 if($_GET["action"]=="gettrend"){
 	header("Content-type: application/json");
@@ -214,7 +200,6 @@ if($_GET["action"]=="getbeerprices"){
 	header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 	$home = $_GET["home"];
 	$sql = "SELECT `country`, (`price` * ((SELECT `value` FROM `currencies` WHERE `id` = ( SELECT `id` FROM `currencies` WHERE `currency_code`=:home ORDER BY `time` DESC LIMIT 1)))/(SELECT `value` FROM `currencies` WHERE `id` = ( SELECT `id` FROM `currencies` WHERE `currency_code`='GBP' ORDER BY `time` DESC LIMIT 1))) AS price FROM `currencies_beer` ORDER BY RAND() LIMIT 6";
-	//$sql = "SELECT `value` FROM `currencies` WHERE `currency_code`=:home  ORDER BY `time` ASC";
 	$b=$dbh->prepare($sql);
 	$b->bindParam(":home",$home);
 	$b->execute();
@@ -223,4 +208,5 @@ if($_GET["action"]=="getbeerprices"){
 	echo $_GET['callback']."(".$json.");";
 
 }
+
 ?>
