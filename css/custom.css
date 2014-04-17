@@ -1,11 +1,9 @@
 *, h1, h2, h3, h4, h5, h6{
 	color: #421C52;
 }
-
 body{
 	background-color: #BDAEC6;
 }
-
 .logo-div{
 	height:70px;
 
@@ -16,22 +14,18 @@ body{
 
 	height:70px;
 }
-
 .top-currencies-div .box{
 	height: 100%;
 	padding: 0.5rem 0px 0.5rem 0.5rem;
 }
-
 .top-currencies-div .box:last-child{
 	padding-right: 0.5rem;
 }
-
 .top-currencies-div .box .small-box{
 	height: 100%;
 	padding:0.2rem;
     vertical-align:middle; 
 }
-
 .symbol-div, .data-div, .arrow-div{
 	display: inline-block;
 	text-align: center;
@@ -42,11 +36,9 @@ body{
 .percent-div{
 	margin-bottom: 1rem;
 }
-
 .percent-div, .value-div{
 
 }
-
 .data-div{
 	position: relative;
     z-index: 1;
@@ -59,7 +51,6 @@ body{
 	height: 48px;
 	line-height: 48px;
 }
-
 .arrow-div{
 	width: 23px;
 	height: 50px;
@@ -67,15 +58,12 @@ body{
 	right: 0;
 	z-index: 0;
 }
-
 .top-currencies-div .box:last-child .arrow-div{
 	right:0.5rem;
 }
-
 .arrow-up{
 	background-image: url("../img/arrow-up.png");
 }
-
 .arrow-down{
 	background-image: url("../img/arrow-down.png");
 }
@@ -84,7 +72,6 @@ body{
 .second-line .small-box{
 	padding: 0.5rem;
 }
-
 .second-line .converter-inputs, .second-line .prediction, .second-line .threshold, .second-line .graph{
 	margin-bottom: 1rem;
 }
@@ -92,42 +79,34 @@ body{
 #mapModal{
 	height: 75%;
 }
-
 #mapModal img{
 	padding: 1rem;
 	margin: auto;
 }
-
 #worldmap{
 	width:100%;
 	margin:auto;
 	height: 100%;
 }
-
 #worldmap .map{
 	width: 100%;
 	height: 90%;
 	min-height: 250px;
 }
-
 .price-beer{
 
 	height:100px;
 }
-
 .price-beer .box{
 	height: 100%;
 	padding: 0.5rem 0px 0.5rem 0.5rem;
 }
-
 .price-beer .box:last-child{
 	padding-right: 0.5rem;
 }
-
 .price-beer .box .small-box{
 	height: 100%;
 }
-
 .price-beer .priceDiv{
 	
     height: 100%;
@@ -143,7 +122,6 @@ body{
     z-index: 5;
     font-weight: bold;
 }
-
 .price-beer .images{
 	height: 100%;
     position: relative;
@@ -151,14 +129,12 @@ body{
     top: -100%;
     z-index: 4;
 }
-
 .price-beer .beer{
 	height: inherit;
     opacity: 0.62;
     position: relative;
     z-index: 4;
 }
-
 .price-beer .flag{
 	display: block;
     height: inherit;
@@ -169,55 +145,44 @@ body{
     width: auto;
     z-index: 3;
 }
-
 .centered{
 	text-align: center;
 }
 
-.ui-helper-hidden-accessible{
-	display:none;
-}
+
+.ui-helper-hidden-accessible{display:none}
 
 label{
 	color: #421C52 !important;
 }
-
 button, .button{
 	color: #421C52;
 	background-color: #BDAEC6;
 }
-
 button:hover, .button:hover, button:focus, .button:focus{
 	color: #BDAEC6;
 	background-color: #421C52;
 }
-
 span.postfix, label.postfix{
 	color: #421C52;
 	background-color: #BDAEC6;
 }
-
 .has-tip:hover, .has-tip:focus{
 	color: #732C7B;
 	border-bottom: 1px dotted #BDAEC6;
 }
-
 .color4{
 	background-color: #421C52;
 }
-
 .color3{
 	background-color: #732C7B;
 }
-
 .color2{
 	background-color: #9C8AA5;
 }
-
 .color1{
 	background-color: #BDAEC6;
 }
-
 .joyride-tip-guide p{
 	color: #FFFFFF;
 }
@@ -227,5 +192,9 @@ span.postfix, label.postfix{
 @media only screen and (min-width: 64.063em) { 
 	.symbol-div{
 		font-size: 1.2rem;
+	}
+	.smallmap{
+		position: relative;
+		top: -6rem;
 	}
 } /* min-width 1025px, large screens */
