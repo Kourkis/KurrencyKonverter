@@ -66,6 +66,8 @@ $(function () {
     targetValueResetButton.addEventListener("click", changeTargetValueInput, false);
     intervalCurrencies = setInterval(currencyHandler, 1000);
 
+    /* -- Initialize the map in the background -- */
+    initializeMap();
 });
 
 /* -- Checks that the home currency, host currency, target value and email is set, and send the request to the server. -- */
@@ -409,7 +411,7 @@ function log(thing) {
         console.log(thing);
 }
 
-/* -- Initializes the Google map once the page is loaded -- */
+/* -- Initializes the Google map -- */
 function initializeMap() {
     google.maps.visualRefresh = true;
     var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
@@ -473,4 +475,3 @@ function initializeMap() {
     });
     window.map = map;
 }
-google.maps.event.addDomListener(window, 'load', initializeMap);

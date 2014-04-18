@@ -1,119 +1,147 @@
-*, h1, h2, h3, h4, h5, h6{
-	color: #421C52;
-}
-body{
-	background-color: #BDAEC6;
-}
-.logo-div{
-	height:70px;
-
-	margin-bottom: 1rem;
+*, h1, h2, h3, h4, h5, h6 {
+    color: #421C52;
 }
 
-.top-currencies-div{
+body {
+    background-color: #BDAEC6;
+}
 
-	height:70px;
+.logo-div {
+    height: 70px;
+    margin-bottom: 1rem;
 }
-.top-currencies-div .box{
-	height: 100%;
-	padding: 0.5rem 0px 0.5rem 0.5rem;
+
+.top-currencies-div {
+    height: 70px;
 }
-.top-currencies-div .box:last-child{
-	padding-right: 0.5rem;
+
+.top-currencies-div .box {
+    height: 100%;
+    padding: 0.5rem 0px 0.5rem 0.5rem;
 }
-.top-currencies-div .box .small-box{
-	height: 100%;
-	padding:0.2rem;
-    vertical-align:middle; 
+
+.top-currencies-div .box:last-child {
+    padding-right: 0.5rem;
 }
-.symbol-div, .data-div, .arrow-div{
-	display: inline-block;
-	text-align: center;
+
+.top-currencies-div .box .small-box {
+    height: 100%;
+    padding: 0.2rem;
+    vertical-align: middle;
+}
+
+.symbol-div, .data-div, .arrow-div {
+    display: inline-block;
+    text-align: center;
     vertical-align: middle;
     height: 100%;
 }
 
-.percent-div{
-	margin-bottom: 1rem;
+.percent-div {
+    margin-bottom: 1rem;
 }
-.percent-div, .value-div{
 
+.percent-div, .value-div {
 }
-.data-div{
-	position: relative;
+
+.data-div {
+    position: relative;
     z-index: 1;
     margin-left: calc(60% - 5rem);
 }
 
-.symbol-div{
-	font-weight: bolder;
-	font-size: 1rem;
-	height: 48px;
-	line-height: 48px;
+.symbol-div {
+    font-weight: bolder;
+    font-size: 1rem;
+    height: 48px;
+    line-height: 48px;
 }
-.arrow-div{
-	width: 23px;
-	height: 50px;
-	position: absolute;
-	right: 0;
-	z-index: 0;
+
+.arrow-div {
+    width: 23px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    z-index: 0;
 }
-.top-currencies-div .box:last-child .arrow-div{
-	right:0.5rem;
+
+.top-currencies-div .box:last-child .arrow-div {
+    right: 0.5rem;
 }
-.arrow-up{
-	background-image: url("../img/arrow-up.png");
+
+.arrow-down, .arrow-up{
+    background: url("../img/sprites.png") no-repeat;
 }
+
 .arrow-down{
-	background-image: url("../img/arrow-down.png");
+    background-position: 0 -53px ;
+    width: 23px;
+    height: 50px;
 }
 
-
-.second-line .small-box{
-	padding: 0.5rem;
-}
-.second-line .converter-inputs, .second-line .prediction, .second-line .threshold, .second-line .graph{
-	margin-bottom: 1rem;
+.arrow-up{
+    background-position: 0 0;
+    width: 23px;
+    height: 50px;
 }
 
-#mapModal{
-	height: 75%;
+.second-line .small-box {
+    padding: 0.5rem;
 }
-#mapModal img{
-	padding: 1rem;
-	margin: auto;
-}
-#worldmap{
-	width:100%;
-	margin:auto;
-	height: 100%;
-}
-#worldmap .map{
-	width: 100%;
-	height: 90%;
-	min-height: 250px;
-}
-.price-beer{
 
-	height:100px;
+.second-line .converter-inputs, .second-line .prediction, .second-line .threshold, .second-line .graph {
+    margin-bottom: 1rem;
 }
-.price-beer .box{
-	height: 100%;
-	padding: 0.5rem 0px 0.5rem 0.5rem;
+
+#container{
+    height: 400px; 
+    min-width: 310px;
 }
-.price-beer .box:last-child{
-	padding-right: 0.5rem;
+
+#mapModal {
+    height: 75%;
 }
-.price-beer .box .small-box{
-	height: 100%;
+
+#mapModal img {
+    padding: 1rem;
+    margin: auto;
 }
-.price-beer .priceDiv{
-	
+
+#worldmap {
+    width: 100%;
+    margin: auto;
     height: 100%;
 }
 
-.price-beer .price{
-	background-color: rgba(128, 128, 128, 0.4);
+#worldmap .map {
+    width: 100%;
+    height: 90%;
+    min-height: 250px;
+}
+
+.price-beer {
+    height: 100px;
+}
+
+.price-beer .box {
+    height: 100%;
+    padding: 0.5rem 0px 0.5rem 0.5rem;
+}
+
+.price-beer .box:last-child {
+    padding-right: 0.5rem;
+}
+
+.price-beer .box .small-box {
+    height: 100%;
+}
+
+.price-beer .priceDiv {
+    height: 100%;
+}
+
+.price-beer .price {
+    background-color: rgba(128, 128, 128, 0.4);
     height: 100%;
     line-height: 5.3rem;
     position: relative;
@@ -122,21 +150,24 @@ body{
     z-index: 5;
     font-weight: bold;
 }
-.price-beer .images{
-	height: 100%;
+
+.price-beer .images {
+    height: 100%;
     position: relative;
     text-align: center;
     top: -100%;
     z-index: 4;
 }
-.price-beer .beer{
-	height: inherit;
+
+.price-beer .beer {
+    height: inherit;
     opacity: 0.62;
     position: relative;
     z-index: 4;
 }
-.price-beer .flag{
-	display: block;
+
+.price-beer .flag {
+    display: block;
     height: inherit;
     margin: auto;
     position: relative;
@@ -145,56 +176,67 @@ body{
     width: auto;
     z-index: 3;
 }
-.centered{
-	text-align: center;
+
+.centered {
+    text-align: center;
 }
 
-
-.ui-helper-hidden-accessible{display:none}
-
-label{
-	color: #421C52 !important;
-}
-button, .button{
-	color: #421C52;
-	background-color: #BDAEC6;
-}
-button:hover, .button:hover, button:focus, .button:focus{
-	color: #BDAEC6;
-	background-color: #421C52;
-}
-span.postfix, label.postfix{
-	color: #421C52;
-	background-color: #BDAEC6;
-}
-.has-tip:hover, .has-tip:focus{
-	color: #732C7B;
-	border-bottom: 1px dotted #BDAEC6;
-}
-.color4{
-	background-color: #421C52;
-}
-.color3{
-	background-color: #732C7B;
-}
-.color2{
-	background-color: #9C8AA5;
-}
-.color1{
-	background-color: #BDAEC6;
-}
-.joyride-tip-guide p{
-	color: #FFFFFF;
+.ui-helper-hidden-accessible {
+    display: none;
 }
 
+label {
+    color: #421C52 !important;
+}
 
+button, .button {
+    color: #421C52;
+    background-color: #BDAEC6;
+}
 
-@media only screen and (min-width: 64.063em) { 
-	.symbol-div{
-		font-size: 1.2rem;
-	}
-	.smallmap{
-		position: relative;
-		top: -6rem;
-	}
+button:hover, .button:hover, button:focus, .button:focus {
+    color: #BDAEC6;
+    background-color: #421C52;
+}
+
+span.postfix, label.postfix {
+    color: #421C52;
+    background-color: #BDAEC6;
+}
+
+.has-tip:hover, .has-tip:focus {
+    color: #732C7B;
+    border-bottom: 1px dotted #BDAEC6;
+}
+
+.color4 {
+    background-color: #421C52;
+}
+
+.color3 {
+    background-color: #732C7B;
+}
+
+.color2 {
+    background-color: #9C8AA5;
+}
+
+.color1 {
+    background-color: #BDAEC6;
+}
+
+.joyride-tip-guide p {
+    color: #FFFFFF;
+}
+
+@media only screen and (min-width: 64.063em) {
+ 
+    .symbol-div {
+        font-size: 1.2rem;
+    }
+
+    .smallmap {
+        position: relative;
+        top: -6rem;
+    }
 } /* min-width 1025px, large screens */
