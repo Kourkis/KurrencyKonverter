@@ -93,6 +93,10 @@ body {
     margin-bottom: 1rem;
 }
 
+#mapLink{
+    display: block;
+}
+
 #container{
     height: 400px; 
     min-width: 310px;

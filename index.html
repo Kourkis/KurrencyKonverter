@@ -214,17 +214,17 @@
                         <div class="row collapse">
                             <label>Target Value</label>
                             <div class="large-10 medium-10 columns">
-                                <input type="text" class="tip-top" id="targetValueInput" data-tooltip title="Select a couple of currencies to be able to see their current ratio, and change it to your desired threshold." />
+                                <input type="text" class="tip-top" id="targetValueInput" data-tooltip title="Select a couple of currencies to be able to see their current ratio, and change it to your desired threshold." data-options="disable_for_touch:true" />
                             </div>
                             <div class="large-2 medium-2 columns">
-                                <button type="submit" class="button postfix tip-bottom" id="targetValueResetButton" data-tooltip title="Set the ratio to today's ratio.">Reset</button>
+                                <button type="submit" class="button postfix tip-bottom" id="targetValueResetButton" data-tooltip title="Set the ratio to today's ratio." data-options="disable_for_touch:true">Reset</button>
                             </div>
                         </div>
 
                         <div class="row collapse email-field">
                             <label>Email Alert</label>
                             <div class="large-10 medium-10 columns">
-                                <input type="email" placeholder="name@example.com" class="tip-bottom" id="targetValueEmailInput" data-tooltip title="At the moment the ratio between your selected currencies will reach the threshold input above, an email will be sent to this email address to alert you."
+                                <input type="email" placeholder="name@example.com" class="tip-bottom" id="targetValueEmailInput" data-tooltip title="At the moment the ratio between your selected currencies will reach the threshold input above, an email will be sent to this email address to alert you." data-options="disable_for_touch:true"
                                 />
                             </div>
                             <div class="large-2 medium-2 columns">
@@ -255,7 +255,7 @@
                     <div class="small-box smallmap color2">
                         <!-- Div containing the image to display the popup map -->
                         <div class="centered">Currency use in the world</div>
-                        <a data-reveal-id="mapModal" href="">
+                        <a data-reveal-id="mapModal" href="" class="centered" id="mapLink">
                             <img src="img/worldmap_currencies_small.png" alt="Worldmap of currencies">
                         </a>
                     </div>
