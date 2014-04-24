@@ -48,6 +48,7 @@ $(function () {
     })
         .done(function (json) {
             for (var i = 0; i < json.rows.length; i++) {
+                if( json.rows[i][0] != "None" )
                 availableCurrencies.push(json.rows[i][0]);
             };
             $(".currencyselector").autocomplete({
