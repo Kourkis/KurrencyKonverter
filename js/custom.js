@@ -23,13 +23,15 @@ $(function () {
     targetValueResetButton = document.getElementById("targetValueResetButton");
     trend = document.getElementById("trend");
 
-    /* -- If there is no cookie it means that it's the first visit for this user, so let him see the tutorial. -- */
+    /* -- If there is no cookie it means that it's the first visit for this user, so let him see the tutorial and display arbitrary currencies. -- */
     if (!checkCookie()) {
         $("#joyRideTipContent").joyride({
             autoStart: true
         });
-        window.homeCurrency = "";
-        window.hostCurrency = "";
+        window.homeCurrency = "EUR";
+        inputHomeCurrency.value = "EUR";
+        window.hostCurrency = "GBP";
+        inputHostCurrency.value = "GBP";
     }
     /* -- Get the content of the cookie and fill the elements in the page. -- */
     else {
