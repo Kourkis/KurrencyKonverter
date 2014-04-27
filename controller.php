@@ -86,12 +86,12 @@ if ( $_GET["action"] == "getpopularcurrencies" ) {
     $two            = $_GET["host"];
     $tab            = array();
     $currencies     = array(
-         "GBP",
-        "EUR",
-        "AUD",
-        "CAD",
-        "INR",
-        "CNY" 
+        "EUR", 
+        "JPY", 
+        "GBP", 
+        "CHF", 
+        "CAD", 
+        "CNY"
     );
     $usedCurrencies = array();
     if ( isset( $_GET["home"] ) ) {
