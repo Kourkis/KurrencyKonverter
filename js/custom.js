@@ -80,7 +80,7 @@ function setThreshold() {
     if (targetValueInput.value !== 0 && targetValueInput.value !== "" && targetValueEmailInput.value !== "" && window.homeCurrency !== "" && window.hostCurrency !== "") {
         $.ajax({
             dataType: "jsonp",
-            url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=setthreshold&home=" + window.homeCurrency + "&host=" + window.hostCurrency + "&ratio=" + targetValueInput.value + "&email=" + encodeURI(targetValueEmailInput.value) + "&ratioinit=" + ((window.homeRate / window.hostRate).toFixed(3)) + "&callback=mycallback",
+            url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=setthreshold&home=" + window.homeCurrency + "&host=" + window.hostCurrency + "&ratio=" + targetValueInput.value + "&email=" + encodeURI(targetValueEmailInput.value) + "&ratioinit=" + ((window.homeRate / window.hostRate).toFixed(3)),
             success: function (response) {
                 log(response);
                 if (response.status == "bademail") {
@@ -154,7 +154,7 @@ function changeTargetValueInput() {
 function getBeer() {
     $.ajax({
         dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getbeerprices&home=" + window.homeCurrency + "&callback=mycallback",
+        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getbeerprices&home=" + window.homeCurrency,
         success: function (response) {
             log(response);
             priceDiv = document.getElementsByClassName("priceDiv");
@@ -188,7 +188,7 @@ function getBeer() {
 function getTrend() {
     $.ajax({
         dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=gettrend&home=" + window.homeCurrency + "&callback=mycallback",
+        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=gettrend&home=" + window.homeCurrency,
         success: function (response) {
             log(response);
             trend.innerHTML = response.trend;
@@ -200,7 +200,7 @@ function getTrend() {
 function getRates() {
     $.ajax({
         dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getrates&home=" + window.homeCurrency + "&host=" + window.hostCurrency + "&callback=mycallback",
+        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getrates&home=" + window.homeCurrency + "&host=" + window.hostCurrency,
         success: function (response) {
             saveRates(response);
         }
@@ -240,7 +240,7 @@ function setConverter() {
 function drawVisualization() {
     $.ajax({
         dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getcurrencieshistory&home=" + window.homeCurrency + "&host=" + window.hostCurrency + "&callback=mycallback",
+        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getcurrencieshistory&home=" + window.homeCurrency + "&host=" + window.hostCurrency,
         success: function (response) {
             log(response);
             data1 = [];
@@ -342,7 +342,7 @@ function drawVisualization() {
 function getPopularCurrencies() {
     $.ajax({
         dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getpopularcurrencies" + (window.homeCurrency === "" ? "" : "&home=" + window.homeCurrency) + (window.hostCurrency === "" ? "" : "&host=" + window.hostCurrency) + "&callback=mycallback",
+        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getpopularcurrencies" + (window.homeCurrency === "" ? "" : "&home=" + window.homeCurrency) + (window.hostCurrency === "" ? "" : "&host=" + window.hostCurrency),
         success: function (response) {
             log(response);
             var symboldiv = document.getElementsByClassName("symbol-div");

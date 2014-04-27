@@ -1,5 +1,6 @@
 <?php
 require dirname( __FILE__ ) . '/connect.php';
+ob_start( 'ob_gzhandler' );
 class ema
 {
     function get( $data, $range )
