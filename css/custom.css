@@ -17,7 +17,7 @@ body {
 
 .top-currencies-div .box {
     height: 100%;
-    padding: 0.5rem 0px 0.5rem 0.5rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
 }
 
 .top-currencies-div .box:last-child {
@@ -39,9 +39,6 @@ body {
 
 .percent-div {
     margin-bottom: 1rem;
-}
-
-.percent-div, .value-div {
 }
 
 .data-div {
@@ -129,7 +126,7 @@ body {
 
 .price-beer .box {
     height: 100%;
-    padding: 0.5rem 0px 0.5rem 0.5rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
 }
 
 .price-beer .box:last-child {

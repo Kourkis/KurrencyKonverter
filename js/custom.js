@@ -2,9 +2,10 @@ availableCurrencies = [];
 /* -- Set to true to see the magic appear in the web console. -- */
 debug = true; 
 /* -- When loading currencies through the cookie allows the values to be checked. -- */
-loading = new Object(); 
-loading.home = true;
-loading.host = true;
+loading = {
+	home: true,
+	host:true
+}; 
 /* -- Once the page is loaded this function is called and initializes the whole website. -- */
 $(function () { 
     /* -- Initialize Foundation -- */
@@ -35,15 +36,15 @@ $(function () {
     }
     /* -- Get the content of the cookie and fill the elements in the page. -- */
     else {
-        var value = getCookie('save');
-        var currencies = value.split(',');
+        var value = getCookie("save");
+        var currencies = value.split(",");
         window.homeCurrency = currencies[0];
         inputHomeCurrency.value = currencies[0];
         window.hostCurrency = currencies[1];
         inputHostCurrency.value = currencies[1];
     }
     /* -- Get the list of currencies from our fusion table, linked to the map, and set the autocomplete function for the currency selectors. -- */
-    var query = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+'ISO+code'+++FROM+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+GROUP+BY+'ISO+code'+ORDER+BY+'ISO+code'+ASC&hdrs=false&typed=true&key=AIzaSyCCdCZEl31z9YPzDfX7kNOYY09ErJwCArM"
+    var query = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+'ISO+code'+++FROM+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+GROUP+BY+'ISO+code'+ORDER+BY+'ISO+code'+ASC&hdrs=false&typed=true&key=AIzaSyCCdCZEl31z9YPzDfX7kNOYY09ErJwCArM";
     $.ajax({
         url: query,
         cache: false
@@ -52,13 +53,13 @@ $(function () {
             for (var i = 0; i < json.rows.length; i++) {
                 if( json.rows[i][0] != "None" )
                 availableCurrencies.push(json.rows[i][0]);
-            };
+            }
             $(".currencyselector").autocomplete({
                 source: availableCurrencies,
                 autoFocus: true,
                 delay: 200
             });
-            $('.ui-autocomplete').addClass('f-dropdown');
+            $(".ui-autocomplete").addClass("f-dropdown");
             log(availableCurrencies);
         });
     /* -- Get the currencies at the top of the page, set the event listeners on the page and check the currency inputs every second. -- */
@@ -76,16 +77,16 @@ $(function () {
 /* -- Checks that the home currency, host currency, target value and email is set, and send the request to the server. -- */
 function setThreshold() {
     log(targetValueInput.value + " at " + targetValueEmailInput.value + " for " + window.homeCurrency + " and " + window.hostCurrency);
-    if (targetValueInput.value != 0 && targetValueInput.value != "" && targetValueEmailInput.value != "" && window.homeCurrency != "" && window.hostCurrency != "") {
+    if (targetValueInput.value !== 0 && targetValueInput.value !== "" && targetValueEmailInput.value !== "" && window.homeCurrency !== "" && window.hostCurrency !== "") {
         $.ajax({
             dataType: "jsonp",
             url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=setthreshold&home=" + window.homeCurrency + "&host=" + window.hostCurrency + "&ratio=" + targetValueInput.value + "&email=" + encodeURI(targetValueEmailInput.value) + "&ratioinit=" + ((window.homeRate / window.hostRate).toFixed(3)) + "&callback=mycallback",
             success: function (response) {
                 log(response);
-                if (response.status == 'bademail') {
+                if (response.status == "bademail") {
                     alert("Invalid email address.");
                 }
-                if (response.status == 'ok') {
+                if (response.status == "ok") {
                     alert("Target value set.");
                 }
             }
@@ -137,7 +138,7 @@ function currencyHandler() {
         drawVisualization();
         clearInterval(intervalCurrencies);
         intervalCurrencies = false;
-        setCookie('save', window.homeCurrency + ',' + window.hostCurrency);
+        setCookie("save", window.homeCurrency + "," + window.hostCurrency);
     } else {
         if (!intervalCurrencies)
             intervalCurrencies = setInterval(currencyHandler, 1000);
@@ -160,7 +161,7 @@ function getBeer() {
             $.each(response, function (key, val) {
                 var value = parseFloat(val.price);
                 var div = priceDiv[key];
-                var countryFlag = val.country.replace(/ /g, "_");;
+                var countryFlag = val.country.replace(/ /g, "_");
                 div.getElementsByClassName("price")[0].innerHTML = value.toFixed(2);
                 div.getElementsByClassName("flag")[0].alt = val.country;
                 div.getElementsByClassName("flag")[0].src = "img/flags/" + countryFlag + ".png";
@@ -168,7 +169,7 @@ function getBeer() {
             });
         },
         complete: function () {
-            var query = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+Sign+FROM+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+WHERE+'ISO+code'%3D'" + window.homeCurrency + "'+LIMIT+1&hdrs=false&typed=true&key=AIzaSyCCdCZEl31z9YPzDfX7kNOYY09ErJwCArM"
+            var query = "https://www.googleapis.com/fusiontables/v1/query?sql=SELECT+Sign+FROM+1bTMHLs315h5NmkkucBAXYSeQjoiGXQyw0-4y_1nP+WHERE+'ISO+code'%3D'" + window.homeCurrency + "'+LIMIT+1&hdrs=false&typed=true&key=AIzaSyCCdCZEl31z9YPzDfX7kNOYY09ErJwCArM";
             $.ajax({
                 url: query,
                 cache: false
@@ -255,58 +256,67 @@ function drawVisualization() {
             });
 
             /* -- Initializes the chart with the data we just got and some parameters. -- */
-            $('#container').highcharts('StockChart', {
+            $("#container").highcharts("StockChart", {
                 rangeSelector: {
                     selected: 1,
-                    inputEnabled: $('#container').width() > 500,
+                    inputEnabled: $("#container").width() > 500,
                     buttons: [{
-                        type: 'day',
+                        type: "day",
                         count: 1,
-                        text: '1d'
+                        text: "1d"
                     }, {
-                        type: 'day',
+                        type: "day",
                         count: 7,
-                        text: '7d'
+                        text: "7d"
                     }, {
-                        type: 'month',
+                        type: "month",
                         count: 1,
-                        text: '1m'
+                        text: "1m"
                     }, {
-                        type: 'month',
+                        type: "month",
                         count: 6,
-                        text: '6m'
+                        text: "6m"
                     }, {
-                        type: 'year',
+                        type: "year",
                         count: 1,
-                        text: '1y'
+                        text: "1y"
                     }, {
-                        type: 'all',
-                        text: 'All'
+                        type: "all",
+                        text: "All"
                     }]
                 },
                 yAxis: {
                     labels: {
                         formatter: function () {
-                            return (this.value > 0 ? '+' : '') + this.value + '%';
+                            return (this.value > 0 ? "+" : "") + this.value + "%";
                         }
                     }
                 },
+                xAxis : {
+                    minRange: 3600 * 1000 // one hour
+                },
                 plotOptions: {
                     series: {
-                        compare: 'percent'
+                        compare: "percent"
                     }
                 },
                 title: {
-                    text: window.homeCurrency + ' vs ' + window.hostCurrency
+                    text: window.homeCurrency + " vs " + window.hostCurrency
                 },
                 series: [{
                     name: window.homeCurrency,
                     data: data1,
-                    pointInterval: 3600 * 1000,
+                    dataGrouping: {
+                        enabled: true,
+                        forced: true
+                    }
                 }, {
                     name: window.hostCurrency,
                     data: data2,
-                    pointInterval: 3600 * 1000,
+                    dataGrouping: {
+                        enabled: true,
+                        forced: true
+                    }
                 }],
                 chart: {
                     borderRadius: 0,
@@ -318,8 +328,8 @@ function drawVisualization() {
                             y2: 1
                         },
                         stops: [
-                            [0, '#BDAEC6'],
-                            [1, '#9C8AA5']
+                            [0, "#BDAEC6"],
+                            [1, "#9C8AA5"]
                         ]
                     }
                 }
@@ -332,7 +342,7 @@ function drawVisualization() {
 function getPopularCurrencies() {
     $.ajax({
         dataType: "jsonp",
-        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getpopularcurrencies" + (window.homeCurrency == "" ? "" : "&home=" + window.homeCurrency) + (window.hostCurrency == "" ? "" : "&host=" + window.hostCurrency) + "&callback=mycallback",
+        url: "http://lemichel.eu/rgu/kurrencykonverter/controller.php?action=getpopularcurrencies" + (window.homeCurrency === "" ? "" : "&home=" + window.homeCurrency) + (window.hostCurrency === "" ? "" : "&host=" + window.hostCurrency) + "&callback=mycallback",
         success: function (response) {
             log(response);
             var symboldiv = document.getElementsByClassName("symbol-div");
@@ -340,10 +350,10 @@ function getPopularCurrencies() {
             var valuediv = document.getElementsByClassName("value-div");
             var arrowdiv = document.getElementsByClassName("arrow-div");
             $.each(response, function (key, value) {
-                symboldiv[key].textContent = value[0].currency_code
+                symboldiv[key].textContent = value[0].currency_code;
                 valuediv[key].textContent = (1 / (value[0].value)).toFixed(3);
                 log(value[0].percent);
-                var percent = new Number(value[0].percent);
+                var percent = Number(value[0].percent);
                 var percentFormatted = percent.toFixed(3);
                 percentdiv[key].textContent = percentFormatted + "%";
                 if (percent >= 0) {
@@ -393,10 +403,10 @@ function setCookie(cname, cvalue) {
 /* -- Returns the content of the cookie. -- */
 function getCookie(cname) {
     var name = cname + "=";
-    var ca = document.cookie.split(';');
+    var ca = document.cookie.split(";");
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i].trim();
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length);
     }
     return "";
 }
@@ -405,7 +415,7 @@ function getCookie(cname) {
 function checkCookie() {
     var data = getCookie("save");
     log(data);
-    return data != "";
+    return data !== "";
 }
 
 /* -- Used to debug the website, set debug to true to display all the debugging info in the web console. -- */
@@ -417,43 +427,43 @@ function log(thing) {
 /* -- Initializes the Google map -- */
 function initializeMap() {
     google.maps.visualRefresh = true;
-    var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
+    var isMobile = (navigator.userAgent.toLowerCase().indexOf("android") > -1) ||
         (navigator.userAgent.match(/(iPod|iPhone|iPad|BlackBerry|Windows Phone|iemobile)/));
     if (isMobile) {
         var viewport = document.querySelector("meta[name=viewport]");
-        viewport.setAttribute('content', 'initial-scale=1.0, user-scalable=no');
+        viewport.setAttribute("content", "initial-scale=1.0, user-scalable=no");
     }
-    var mapDiv = document.getElementById('googft-mapCanvas');
-    mapDiv.style.width = isMobile ? '100%' : '100%';
-    mapDiv.style.height = isMobile ? '100%' : '90%';
+    var mapDiv = document.getElementById("googft-mapCanvas");
+    mapDiv.style.width = isMobile ? "100%" : "100%";
+    mapDiv.style.height = isMobile ? "100%" : "90%";
     map = new google.maps.Map(mapDiv, {
         center: new google.maps.LatLng(0.0, 0.0),
         zoom: 2,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend-open'));
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend'));
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById("googft-legend-open"));
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById("googft-legend"));
     if (isMobile) {
-        var legend = document.getElementById('googft-legend');
-        var legendOpenButton = document.getElementById('googft-legend-open');
-        var legendCloseButton = document.getElementById('googft-legend-close');
-        legend.style.display = 'none';
-        legendOpenButton.style.display = 'block';
-        legendCloseButton.style.display = 'block';
+        var legend = document.getElementById("googft-legend");
+        var legendOpenButton = document.getElementById("googft-legend-open");
+        var legendCloseButton = document.getElementById("googft-legend-close");
+        legend.style.display = "none";
+        legendOpenButton.style.display = "block";
+        legendCloseButton.style.display = "block";
         legendOpenButton.onclick = function () {
-            legend.style.display = 'block';
-            legendOpenButton.style.display = 'none';
-        }
+            legend.style.display = "block";
+            legendOpenButton.style.display = "none";
+        };
         legendCloseButton.onclick = function () {
-            legend.style.display = 'none';
-            legendOpenButton.style.display = 'block';
-        }
+            legend.style.display = "none";
+            legendOpenButton.style.display = "block";
+        };
     }
 
     /* -- Loads the map once the modal has finished opening, to avoid visual glitches. -- */
-    $(document).on('opened', '[data-reveal]', function () {
+    $(document).on("opened", "[data-reveal]", function () {
         log("reveal opened");
-        google.maps.event.trigger(window.map, 'resize');
+        google.maps.event.trigger(window.map, "resize");
         window.map = new google.maps.Map(mapDiv, {
             center: new google.maps.LatLng(20.0, 0.0),
             zoom: 2,
