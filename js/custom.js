@@ -10,7 +10,6 @@ var loading = {
 $(function () { 
     /* -- Initialize Foundation -- */
     $(document).foundation(); 
-
     /* -- Shortcuts to several elements in the page for later use. -- */
     inputHomeCurrency = document.getElementById("inputHomeCurrency");
     inputHostCurrency = document.getElementById("inputHostCurrency");
@@ -62,14 +61,14 @@ $(function () {
             $(".ui-autocomplete").addClass("f-dropdown");
             log(availableCurrencies);
         });
-    /* -- Get the currencies at the top of the page, set the event listeners on the page and check the currency inputs every second. -- */
-    getPopularCurrencies();
+    /* -- Set the event listeners on the page and check the currency inputs every second. -- */
     inputHomeCurrency.addEventListener("input", currencyHandler, true);
     inputHostCurrency.addEventListener("input", currencyHandler, true);
     targetValueEmailButton.addEventListener("click", setThreshold, false);
     targetValueResetButton.addEventListener("click", changeTargetValueInput, false);
+    converterHomeCurrency.addEventListener("input", converter, true);
+    converterHostCurrency.addEventListener("input", converter, true);
     intervalCurrencies = setInterval(currencyHandler, 1000);
-
     /* -- Initialize the map in the background -- */
     initializeMap();
 });
@@ -244,8 +243,6 @@ function saveRates(json) {
 
 /* -- Once we have valid rates we can set the converter. -- */
 function setConverter() {
-    converterHomeCurrency.addEventListener("input", converter, true);
-    converterHostCurrency.addEventListener("input", converter, true);
     converterHomeCurrency.placeholder = (1 / window.homeRate * window.hostRate).toFixed(3);
     converterHostCurrency.placeholder = (1 / window.hostRate * window.homeRate).toFixed(3);
 }
@@ -390,6 +387,7 @@ function parseDate(date) {
 /* -- Converts from one input to the other, and vice versa. -- */
 function converter(e) {
     if (e.target == converterHomeCurrency) {
+        if(converterHomeCurrency.value !== "")
         converterHostCurrency.value = (converterHomeCurrency.value / window.homeRate * window.hostRate).toFixed(3);
     } else {
         converterHomeCurrency.value = (converterHostCurrency.value / window.hostRate * window.homeRate).toFixed(3);
@@ -473,7 +471,6 @@ function initializeMap() {
             legendOpenButton.style.display = "block";
         };
     }
-
     /* -- Loads the map once the modal has finished opening, to avoid visual glitches. -- */
     $(document).on("opened", "[data-reveal]", function () {
         log("reveal opened");

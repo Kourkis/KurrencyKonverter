@@ -1,4 +1,5 @@
-# www.robotstxt.org/
-# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
-
 User-agent: *
+Disallow: /img/flags/
+Disallow: /img/beer.png
+Disallow: /img/worldmap_currencies_small.png
+Disallow: /img/sprites.png
