@@ -1,10 +1,10 @@
-availableCurrencies = [];
+var availableCurrencies = [];
 /* -- Set to true to see the magic appear in the web console. -- */
-debug = true; 
+var debug = false; 
 /* -- When loading currencies through the cookie allows the values to be checked. -- */
-loading = {
+var loading = {
 	home: true,
-	host:true
+	host: true
 }; 
 /* -- Once the page is loaded this function is called and initializes the whole website. -- */
 $(function () { 
@@ -225,6 +225,20 @@ function saveRates(json) {
     }
     setConverter();
     changeTargetValueInput();
+    /* -- Refreshes the converter by simulating a change in the home currency input. -- */
+    var event;
+    if (document.createEvent) {
+    event = document.createEvent("HTMLEvents");
+    event.initEvent("input", true, true);
+    } else {
+    event = document.createEventObject();
+    event.eventType = "input";
+    }
+    if (document.createEvent) {
+    converterHomeCurrency.dispatchEvent(event);
+    } else {
+    converterHomeCurrency.fireEvent("on" + event.eventType, event);
+    }
 
 }
 
